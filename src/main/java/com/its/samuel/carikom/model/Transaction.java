@@ -9,11 +9,11 @@ import java.time.Instant;
 
 @Entity
 @Data
-@Table(name="transaction")
+@Table(name="transactions")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Transaction {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Instant buydate;
     private int totalCost;

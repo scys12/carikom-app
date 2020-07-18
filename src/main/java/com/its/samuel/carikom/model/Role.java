@@ -5,16 +5,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Data
+@Table(name="roles")
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="categories")
-public class Category {
+public class Role {
     @Id @GeneratedValue
     private Long id;
-    private String name;
-    
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private ERole name;
 }

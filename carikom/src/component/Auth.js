@@ -24,10 +24,10 @@ class Auth extends Component {
             <div className="root-container">
                 <div className="box-controller">                                        
                     <div className={"controller " + (this.state.isLoginOpen ? "selected-controller" : "")} onClick={() => this.showLoginBox()}>
-                        Login
+                        Masuk
                     </div>
                     <div className={"controller " + (this.state.isRegisterOpen ? "selected-controller" : "")} onClick={() => this.showRegisterBox()}>
-                        Register
+                        Daftar
                     </div>
                 </div>
 

@@ -152,12 +152,13 @@ h3 {
 }
 
 .box-controller {
+    
     visibility: visible;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    max-width: 24em;
-    min-width: 21em;
+    max-width: 35em;
+    min-width: 35em;
     height: 50px;
     -webkit-box-shadow: 0px 0px 20px 0px rgba(15, 15, 15, 0.2);
     box-shadow: 0px 0px 20px 0px rgba(15, 15, 15, 0.2);
@@ -185,11 +186,12 @@ h3 {
 .box-container {
     display: flex;
     flex-direction: column;
-    max-width: 24em;
-    min-width: 21em;
+    max-width: 35em;
+    min-width: 35em;
     box-shadow: 0px 0px 20px 0px rgba(15, 15, 15, 0.2);
     border-radius: 6px;
     padding: 24px;
+    margin-bottom: 30px;
 }
 
 .inner-container {
@@ -203,6 +205,8 @@ h3 {
 .header {
     text-align: center;
     padding: 5px;
+    color: #2892D7;
+    font-weight: 700;
     margin-bottom: 17px;
     /* margin-left: 35px; */
     /* margin-right: 35px; */
@@ -221,7 +225,7 @@ h3 {
     display: flex;
     flex-direction: column;
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
 }
 
 .login-label {
