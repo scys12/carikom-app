@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import AppNav from './AppNav';
 
 class Item extends Component {
     state = {
@@ -17,10 +18,15 @@ class Item extends Component {
     render() { 
         const {Items, isLoading} = this.state;
         if (isLoading) {
-            return (<div>Loading...</div>);            
+            return (<div>
+                <AppNav/>
+                Loading...
+                </div>
+            );
         }
         return (
             <div>
+                <AppNav/>
                 <h2>
                     Items
                 </h2>
