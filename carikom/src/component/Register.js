@@ -17,7 +17,7 @@ class Register extends Component {
             confirm_password: "",
             errors: [],
             successful: false,
-            message: false
+            message: ""
          };
     }    
 

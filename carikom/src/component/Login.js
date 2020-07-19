@@ -35,7 +35,7 @@ class Login extends Component {
         if(this.formValidation(e)){
             AuthService.login(this.state.username, this.state.password).then(
                 () =>{
-                    this.props.history.push("/profile");
+                    this.props.history.push("/user/profile");
                     window.location.reload();
                 },
                 error => {                                        
@@ -104,10 +104,10 @@ class Login extends Component {
                 <div className="box">
                     {this.state.message &&
                         <div className="form-group">
-                        <div className="alert alert-danger" role="alert">
-                            {this.state.message}
+                            <div className="alert alert-danger" role="alert">
+                                {this.state.message}
+                            </div>
                         </div>
-                    </div>
                     }
                     <div className="input-group">
                         <label htmlFor="username">Username</label>

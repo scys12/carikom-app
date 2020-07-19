@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import {Form, Button, Container} from 'react-bootstrap'
 import AuthService from './AuthService'
 import UserService from './UserService';
-export default class TambahProduk extends Component {
+
+class TambahProduk extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            successful: false,
             userOwner: AuthService.getCurrentUser(),
             name: "",
             deskripsi: "",
@@ -13,14 +15,12 @@ export default class TambahProduk extends Component {
             kategoriPilihan: `{"id" : 1, "name" : "RAM"}`,
             categories: [],
             errors: [],
-            succesful: false,
             message: ""
         };
     }
     componentDidMount(){
         UserService.getCategories().then(
             response =>{
-                console.log(response.data)
                 this.setState({
                     categories: response.data
                 })
@@ -83,29 +83,29 @@ export default class TambahProduk extends Component {
             UserService.addProduct(this.state.name, this.state.deskripsi, this.state.harga,this.state.kategoriPilihan,this.state.userOwner).then(
                 response =>{
                     this.setState({
-                        message: response.data.message,
+                        message: response.data,
                         successful: true
-                    })
+                    });
+                    this.props.history.push({
+                        pathname: "/user/item",
+                        state: {
+                            message : "Produk berhasil ditambahkan"
+                        }
+                    });
+                    window.location.reload();
                 },
                 error => {
-                    const resMessage =
-                        (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
-                        error.message ||
-                        error.toString();
-
                     this.setState({
                         successful: false,
-                        message: resMessage
+                        message: "Terdapat kesalahan pada data yang diisi, harap mengisi ulang !"
                     });
-                    console.log(resMessage)
                 }
             )
         }else{
             this.setState({
-                succesful:false
-            })
+                successful:false,
+                message: "Terdapat kesalahan pada data yang diisi, harap mengisi ulang !"
+            });
         }
     }
 
@@ -136,9 +136,9 @@ export default class TambahProduk extends Component {
                 hargaErr = error.msg
             }
         }
-
+        const successful = this.state.successful;
         return (
-            <Container>
+            <Container>                                
                 <Form.Group controlId="exampleForm.ControlInput1">
                     <Form.Label>Nama Produk</Form.Label>
                     <Form.Control type="text" name="name" onChange={this.onDataChange.bind(this)} className="produk-input" placeholder="Nama Produk"/>
@@ -154,21 +154,6 @@ export default class TambahProduk extends Component {
                     <Form.Control type="text" name="harga" onChange={this.onDataChange.bind(this)} className="produk-input" placeholder="Harga Produk"/>
                     <small className="danger-error">{ hargaErr ? hargaErr : "" }</small>
                 </Form.Group>
-                {/* <div className="input-group">
-                    <label htmlFor="name">Nama Produk</label>
-                    <input type="text" name="name" onChange={this.onDataChange.bind(this)} className="produk-input" placeholder="Nama Produk"/>
-                    <small className="danger-error">{ nameErr ? nameErr : "" }</small>
-                </div> */}
-                {/* <div className="input-group">
-                    <label htmlFor="deskripsi">Deskripsi Produk</label>
-                    <textarea type="text" rows="10" name="deskripsi" onChange={this.onDataChange.bind(this)}className="produk-input" placeholder="Deskripsi Produk"/>
-                    <small className="danger-error">{ deskripsiErr ? deskripsiErr : "" }</small>
-                </div> */}
-                {/* <div className="input-group">
-                    <label htmlFor="harga">Harga Produk</label>
-                    <input type="text" name="harga" onChange={this.onDataChange.bind(this)} className="produk-input" placeholder="Harga Produk"/>
-                    <small className="danger-error">{ hargaErr ? hargaErr : "" }</small>
-                </div> */}
                 <Form.Group controlId="exampleForm.ControlSelect1">
                     <Form.Label>Kategori</Form.Label>
                     <Form.Control as="select" onChange = {this.onDataChange.bind(this)} name="kategoriPilihan">
@@ -189,3 +174,5 @@ export default class TambahProduk extends Component {
         );
     }
 }
+
+export default (TambahProduk);

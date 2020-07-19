@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, BrowserRouter as Router, Switch} from 'react-router-dom';
+import {Redirect,Route, BrowserRouter as Router, Switch} from 'react-router-dom';
 import Item from './component/Item';
 import Home from './component/Home';
 import Auth from './component/Auth';
@@ -18,8 +18,8 @@ class App extends Component {
                         <Route exact path="/" component={Home}/> 
                         <Route exact path="/user/item" component={Item}/>
                         <Route exact path="/auth" component={Auth}/>
-                        <Route exact path="/user/profile" component={UserDashboard}/>
                         <Route exact path="/user/item/tambah" component={TambahProduk}/>
+                        <Route exact path="/user/profile" component={UserDashboard}/>
                     </Switch>
                 </div>
             </Router>

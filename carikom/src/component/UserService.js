@@ -9,10 +9,10 @@ class UserService {
   }
 
   addProduct(name, description, price, category, userOwner){
-    let id = 2
+    let id = 2;
     if (userOwner.roles[0] === "ROLE_USER") {
         id = 1;
-    }else return;
+    }
     const req_data = {
         name : name,
         description : description,

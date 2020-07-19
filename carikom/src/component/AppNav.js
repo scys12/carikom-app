@@ -51,8 +51,8 @@ class AppNav extends Component {
                 {currentUser ? (
                     <Nav className="ml-5 mr-5" style={{position:"relative", marginLeft:"40px"}}>                        
                         <NavDropdown title={currentUser.nama} id="collasible-nav-dropdown" alt="logo">
-                            <NavDropdown.Item key={1} href={'/user/profile'}>Profil</NavDropdown.Item>
-                            <NavDropdown.Item key={2} href={'/user/item'}>Item</NavDropdown.Item>
+                            <NavDropdown.Item key={1} href="/user/profile">Profil</NavDropdown.Item>
+                            <NavDropdown.Item key={2} href="/user/item">Item</NavDropdown.Item>
                             <NavDropdown.Item key={3} onClick = {this.logout.bind(this)}>Keluar</NavDropdown.Item>
                         </NavDropdown>
                         <div className="icon-navbar"><FontAwesomeIcon icon={faUserCircle} size="1x" color="white"/></div>

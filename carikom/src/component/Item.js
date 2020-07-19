@@ -1,11 +1,20 @@
 import React, { Component } from 'react'
-import { Jumbotron, Container, Card, Row, Image, Button, Breadcrumb} from 'react-bootstrap';
+import { Jumbotron, Container, Card, Row, Image, Button, Breadcrumb, Alert} from 'react-bootstrap';
+
 
 class Item extends Component {
-    state = {
-        isLoading : true,
-        Items : []
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoading : true,
+            Items : [],
+            message: "",
+            visible: false
+        };
+        const stateMessage = "this.props.location.state.message" in window ? this.props.location.state.message : "";
+        console.log(this.stateMessage)
+    }
+    
 
     async componentDidMount(){
         const response = await fetch('/api/items');
@@ -14,7 +23,17 @@ class Item extends Component {
             Items : body,
             isLoading : false
         });
+
+        if (this.stateMessage) {
+            console.log(this.stateMessage)
+            this.setState({message : this.stateMessage});
+            this.setState({visible:true});
+            window.setTimeout(()=>{
+                this.setState({visible:false})
+            },2000)
+        }
     }
+      
     render() { 
         const {Items, isLoading} = this.state;
         if (isLoading) {
@@ -25,6 +44,11 @@ class Item extends Component {
         }
         return (
             <Container>
+                {this.state.message &&( 
+                    <Alert key="1" variant="success">
+                        {this.state.message}
+                    </Alert>
+                )}
                 <Breadcrumb><Button variant="success" href="/user/item/tambah">Tambah Produk</Button></Breadcrumb>
                 <div style={{backgroundColor: "#e9ecef", padding: "20px"}}>
                     <Row className="show-grid text-center">
