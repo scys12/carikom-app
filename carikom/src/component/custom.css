@@ -39,11 +39,11 @@ nav.navbar, .navbar-default {
     background-color: transparent;
 }
 
-nav .navbar-nav a.dropdown-toggle.nav-link, nav.navbar-light .navbar-nav .show>.nav-link, nav.navbar .navbar-nav a.nav-link{
+nav .navbar-nav a.dropdown-toggle.nav-link, nav.navbar-light .navbar-nav .show>.nav-link, nav.navbar .navbar-nav a.nav-link,a.dropdown-toggle.nav-link{
     color: white;
 }
 
-nav.navbar .navbar-nav a.nav-link:hover, nav .navbar-nav a.dropdown-toggle.nav-link:hover{
+nav.navbar .navbar-nav a.nav-link:hover, nav .navbar-nav a.dropdown-toggle.nav-link:hover, a.dropdown-toggle.nav-link:hover{
     color: #24292e;
 }
 
@@ -313,4 +313,26 @@ h3 {
 
 .show {
     visibility: visible;
+}
+
+.data-diri{
+    display: inline-flex;
+    flex-direction: column;
+    margin: 0 30px;
+}
+
+.datadiri{
+    margin: auto;
+    padding: 75px;
+}
+
+.icon-navbar{
+    position:absolute;
+    top:0;
+    right:100%;
+    font-size: 30px;
+}
+
+.produk-button{
+    margin: 10px;
 }

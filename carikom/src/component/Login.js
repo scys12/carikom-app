@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Button} from 'react-bootstrap'
 import AuthService from './AuthService'
+import {withRouter} from 'react-router-dom'
 
 class Login extends Component {
     constructor(props) {
@@ -34,20 +35,13 @@ class Login extends Component {
         if(this.formValidation(e)){
             AuthService.login(this.state.username, this.state.password).then(
                 () =>{
-                    this.props.push("/profile");
+                    this.props.history.push("/profile");
                     window.location.reload();
                 },
-                error => {
-                    const resMessage =
-                        (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
-                        error.message ||
-                        error.toString();
-                    
+                error => {                                        
                     this.setState({
                         loading:false,
-                        message: "Usename atau Password salah"
+                        message: "Username atau Password salah"
                     })
                 }
             );
@@ -141,4 +135,4 @@ class Login extends Component {
     }
 }
  
-export default Login;
+export default withRouter(Login);

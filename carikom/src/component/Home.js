@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
-import { Jumbotron, Container, Card, Row, Col, Image, Button} from 'react-bootstrap';
+import { Jumbotron, Container, Card, Row, Image, Button} from 'react-bootstrap';
 
 export default class Home extends Component {
     state = {  }
@@ -77,7 +76,7 @@ export default class Home extends Component {
                                                     Some quick example text to build on the card title and make up the bulk of
                                                     the card's content.
                                                 </Card.Text>
-                                            <Button variant="primary">Baca Selengkapnya</Button>
+                                            <Button variant="primary">Lihat Selengkapnya</Button>
                                         </Card.Body>
                                     </Card>
                                 </div>
@@ -90,7 +89,7 @@ export default class Home extends Component {
                                                     Some quick example text to build on the card title and make up the bulk of
                                                     the card's content.
                                                 </Card.Text>
-                                            <Button variant="primary">Baca Selengkapnya</Button>
+                                            <Button variant="primary">Lihat Selengkapnya</Button>
                                         </Card.Body>
                                     </Card>
                                 </div>
@@ -103,7 +102,7 @@ export default class Home extends Component {
                                                     Some quick example text to build on the card title and make up the bulk of
                                                     the card's content.
                                                 </Card.Text>
-                                            <Button variant="primary">Baca Selengkapnya</Button>
+                                            <Button variant="primary">Lihat Selengkapnya</Button>
                                         </Card.Body>
                                     </Card>
                                 </div>

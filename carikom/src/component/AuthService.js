@@ -7,7 +7,7 @@ class AuthService{
         return axios.post(API_URL + "signin",{
             username, password
         }).then( response => {
-            if (response.data.accessToken) {
+            if (response.data.token) {
                 localStorage.setItem("user", JSON.stringify(response.data));
             }
             return response.data;
@@ -19,15 +19,17 @@ class AuthService{
     }
 
     register(username, email, password, nama, lokasi, telepon){
-        return axios.post(API_URL + "signup", {
+        const request_data = {
             username : username,
             email : email,
             password : password, 
             nama: nama,
             lokasi : lokasi, 
             telepon : telepon,
-            role : ["ROLE_USER"]
-        });
+            roles : ["user"]
+        }
+        console.log(request_data);
+        return axios.post(API_URL + "signup", request_data);
     }
 
     getCurrentUser(){
