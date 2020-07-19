@@ -7,7 +7,7 @@ class AppNav extends Component {
     };
 
     async componentDidMount(){
-        const response = await fetch('/api/categories');
+        const response = await fetch('/api/carikom/categories');
         const body = await response.json();
         this.setState({
             Categories : body

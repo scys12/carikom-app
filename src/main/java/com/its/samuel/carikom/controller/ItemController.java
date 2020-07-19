@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/carikom")
 public class ItemController {
     private ItemRepository itemRepository;
 

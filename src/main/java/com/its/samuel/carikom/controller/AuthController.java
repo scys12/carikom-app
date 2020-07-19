@@ -57,7 +57,7 @@ public class AuthController {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream().map(
                 item -> item.getAuthority()).collect(Collectors.toList());
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), userDetails.getLokasi(), userDetails.getName(), userDetails.getNomor_telp(), roles));
+        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), userDetails.getLokasi(), userDetails.getNama(), userDetails.getTelepon(), roles));
     }
 
     @PostMapping("/signup")
@@ -69,7 +69,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body(new MessageResponse("Email sudah dipakai! Silahkan memakai email lain"));
         }
 
-        User user = new User(signupRequest.getEmail(), signupRequest.getLokasi(), signupRequest.getName(), signupRequest.getUsername(), signupRequest.getNomor_telp(), passwordEncoder.encode(signupRequest.getPassword()));
+        User user = new User(signupRequest.getEmail(), signupRequest.getLokasi(), signupRequest.getNama(), signupRequest.getUsername(), signupRequest.getTelepon(), passwordEncoder.encode(signupRequest.getPassword()));
 
         Set<String> strRoles = signupRequest.getRoles();
         Set<Role> roles = new HashSet<>();
@@ -93,6 +93,6 @@ public class AuthController {
 
         user.setRoles(roles);
         userRepository.save(user);
-        return ResponseEntity.ok(new MessageResponse("User berhasil ditambahkan"));
+        return ResponseEntity.ok(new MessageResponse("User berhasil ditambahkan! Sekarang anda dapat masuk melalui akun anda yang baru dibuat"));
     }
 }

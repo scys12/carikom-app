@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Button} from 'react-bootstrap'
+import AuthService from './AuthService'
 
 const emailRegex = RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
 
@@ -14,40 +15,94 @@ class Register extends Component {
             telepon: "",
             password: "",
             confirm_password: "",
-            errors: []
+            errors: [],
+            successful: false,
+            message: false
          };
     }    
 
     formValidation(e){
+        let isValid = 1;
         if(this.state.username === ""){
+            isValid = 0
             this.showValidationErr("username", "Username tidak boleh kosong");
+        }else if(this.state.username.length <3 || this.state.username.length > 20){
+            isValid = 0
+            this.showValidationErr("username", "Username memiliki panjang minimal 3 karakter dan maksimal 20 karakter");
         }
         if(this.state.email === ""){
+            isValid = 0
             this.showValidationErr ("email", "Email tidak boleh kosong");
         }else if(!emailRegex.test(this.state.email)){
+            isValid = 0
             this.showValidationErr("email", "Tolong masukkan email dengan benar")
         }
         if(this.state.nama === ""){
+            isValid = 0
             this.showValidationErr ("nama", "Nama tidak boleh kosong");
         }if(this.state.lokasi === ""){
+            isValid = 0
             this.showValidationErr ("lokasi", "Lokasi tidak boleh kosong");
         }if(this.state.telepon === ""){
+            isValid = 0
             this.showValidationErr ("telepon", "Nomor Telepon tidak boleh kosong");
         }
-        if (this.state.confirm_password !== this.state.password && (this.state.confirm_password !== "" && this.state.password !== "")) {
-                this.showValidationErr ("password", "Password anda tidak sama");
-                this.showValidationErr ("confirm_password", "Password anda tidak sama");
-            }else{
-                if(this.state.password === ""){
-                    this.showValidationErr ("password", "Password tidak boleh kosong");
-                }if(this.state.confirm_password === ""){
-                    this.showValidationErr ("confirm_password", "Konfirmasi Password tidak boleh kosong");
-                }
-            }       
+        if (this.state.confirm_password !== this.state.password && (this.state.password.length > 0 && this.state.confirm_password.length > 0)) {
+            isValid = 0
+            this.showValidationErr ("password", "Password anda tidak sama");
+            this.showValidationErr ("confirm_password", "Password anda tidak sama");
+        }else{
+            if(this.state.password === ""){
+                isValid = 0
+                this.showValidationErr ("password", "Password tidak boleh kosong");
+            }else if(this.state.password.length < 3){
+                isValid = 0
+                this.showValidationErr ("password", "Password harus memiliki minimal 3 karakter");
+            }
+            if(this.state.confirm_password === ""){
+                isValid = 0
+                this.showValidationErr ("confirm_password", "Konfirmasi Password tidak boleh kosong");
+            }else if(this.state.confirm_password.length < 3){
+                isValid = 0
+                this.showValidationErr ("confirm_password", "Konfirmasi Password harus memiliki minimal 3 karakter");
+            }
+        }
+        return isValid;
     }
 
     submitRegister(e){
-        this.formValidation(e);
+        this.setState({
+            successful:false,
+            message: ""
+        })
+        if(this.formValidation(e)){
+            AuthService.register(this.state.username, this.state.email, this.state.password,this.state.nama, this.state.lokasi, this.state.telepon).then(
+                response =>{
+                    console.log("khh");
+                    this.setState({
+                        message: response.data.message,
+                        successful: true
+                    })
+                },
+                error => {
+                    const resMessage =
+                        (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+
+                    this.setState({
+                        successful: false,
+                        message: resMessage
+                    });
+                }
+            )
+        }else{
+            this.setState({
+                succesful:false
+            })
+        }
     }
 
     showValidationErr(elm, msg) {
@@ -95,6 +150,7 @@ class Register extends Component {
     }
 
     render() { 
+        console.log(this.state.successful);
         let usernameErr, passwordErr, emailErr, namaErr, confirmPasswordErr, lokasiErr, teleponErr = null
         for (const err of this.state.errors) {
             if (err.elm === "username") {
@@ -119,6 +175,13 @@ class Register extends Component {
                     Daftar
                 </div>
                 <div className="box">
+                    {this.state.message &&
+                        <div className="form-group">
+                        <div className={this.state.successful ? "alert alert-success" : "alert alert-danger" } role="alert">
+                            {this.state.message}                            
+                        </div>                        
+                    </div>
+                    }
                     <div className="input-group">
                         <label htmlFor="email">Email</label>
                         <input type="text" name="email" className="login-input" onChange={this.onDataChange.bind(this)} placeholder="Email"/>

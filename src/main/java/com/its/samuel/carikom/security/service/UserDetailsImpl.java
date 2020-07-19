@@ -18,21 +18,21 @@ public class UserDetailsImpl implements UserDetails {
     private String username;
     private String email;
     private String lokasi;
-    private String name;
-    private String nomor_telp;
+    private String nama;
+    private String telepon;
 
     @JsonIgnore
     private String password;
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String username, String email, String lokasi, String name, String nomor_telp, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImpl(Long id, String username, String email, String lokasi, String nama, String telepon, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.lokasi = lokasi;
-        this.name = name;
-        this.nomor_telp = nomor_telp;
+        this.nama = nama;
+        this.telepon = telepon;
         this.password = password;
         this.authorities = authorities;
     }
@@ -42,7 +42,7 @@ public class UserDetailsImpl implements UserDetails {
                 role -> new SimpleGrantedAuthority(role.getName().name())).collect(Collectors.toList());
 
         return new UserDetailsImpl(
-                user.getId(), user.getUsername(), user.getEmail(), user.getLokasi(), user.getName(), user.getNomor_telp(), user.getPassword(), authorities
+                user.getId(), user.getUsername(), user.getEmail(), user.getLokasi(), user.getNama(), user.getTelepon(), user.getPassword(), authorities
         );
     }
 
@@ -73,12 +73,12 @@ public class UserDetailsImpl implements UserDetails {
         return lokasi;
     }
 
-    public String getName() {
-        return name;
+    public String getNama() {
+        return nama;
     }
 
-    public String getNomor_telp() {
-        return nomor_telp;
+    public String getTelepon() {
+        return telepon;
     }
 
     @Override

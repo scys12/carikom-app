@@ -18,9 +18,9 @@ public class SignupRequest {
     @NotBlank
     private String lokasi;
     @NotBlank
-    private String name;
+    private String nama;
     @NotBlank
-    private String nomor_telp;
+    private String telepon;
 
     private Set<String> roles;
 

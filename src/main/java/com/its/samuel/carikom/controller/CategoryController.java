@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/carikom")
 public class CategoryController {
     private CategoryRepository categoryRepository;
 

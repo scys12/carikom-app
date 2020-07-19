@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Button} from 'react-bootstrap'
-
-const emailRegex = RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+import AuthService from './AuthService'
 
 class Login extends Component {
     constructor(props) {
@@ -9,7 +8,9 @@ class Login extends Component {
         this.state = {
             username: "",
             password: "",
-            errors: []
+            loading: false,
+            errors: [],
+            message: ""
         };
     }
 
@@ -26,23 +27,36 @@ class Login extends Component {
     }
 
     submitLogin(e){
+        this.setState({
+            loading: true,
+            message: ""         
+        })
         if(this.formValidation(e)){
-
-        }
-
-    }
-
-    componentDidMount(){
-        try{
-            const response = await fetch('/auth/login', {
-                method: 'post',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-type': 'application/json'
-                }                
+            AuthService.login(this.state.username, this.state.password).then(
+                () =>{
+                    this.props.push("/profile");
+                    window.location.reload();
+                },
+                error => {
+                    const resMessage =
+                        (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+                    
+                    this.setState({
+                        loading:false,
+                        message: "Usename atau Password salah"
+                    })
+                }
+            );
+        }else{
+            this.setState({
+                loading:false
             })
-            const body = await response.json();
         }
+
     }
 
     showValidationErr(elm, msg) {
@@ -94,18 +108,33 @@ class Login extends Component {
                     Masuk
                 </div>
                 <div className="box">
+                    {this.state.message &&
+                        <div className="form-group">
+                        <div className="alert alert-danger" role="alert">
+                            {this.state.message}
+                        </div>
+                    </div>
+                    }
                     <div className="input-group">
                         <label htmlFor="username">Username</label>
-                        <input type="text" name="username" onChange={() => this.onDataChange()} className="login-input" placeholder="Username"/>
+                        <input type="text" name="username" onChange={this.onDataChange.bind(this)} className="login-input" placeholder="Username"/>
                         <small className="danger-error">{ userNameErr ? userNameErr : "" }</small>
                     </div>
 
                     <div className="input-group">
                         <label htmlFor="password">Password</label>
-                        <input type="password" name="password" onChange={() => this.onDataChange()} className="login-input" placeholder="Password"/>
+                        <input type="password" name="password" onChange={this.onDataChange.bind(this)}className="login-input" placeholder="Password"/>
                         <small className="danger-error">{ passwordErr ? passwordErr : "" }</small>
                     </div>
-                    <Button variant="primary" onClick={this.submitLogin.bind(this)}>Masuk</Button>
+                    <Button 
+                        variant="primary" onClick={this.submitLogin.bind(this)}
+                        disabled={this.state.loading}
+                    >
+                        {this.state.loading && (
+                            <span className="spinner-border spinner-border-sm"></span>
+                        )}
+                        <span>Masuk</span>
+                    </Button>
                 </div>
             </div>
          );
