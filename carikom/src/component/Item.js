@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Jumbotron, Container, Card, Row, Image, Button, Breadcrumb, Alert} from 'react-bootstrap';
+import UserService from './UserService';
+import AuthService from './AuthService';
 
 
 class Item extends Component {
@@ -9,7 +11,8 @@ class Item extends Component {
             isLoading : true,
             Items : [],
             message: "",
-            visible: false
+            visible: false,
+            user: AuthService.getCurrentUser()
         };
         const stateMessage = "this.props.location.state.message" in window ? this.props.location.state.message : "";
         console.log(this.stateMessage)
@@ -17,12 +20,18 @@ class Item extends Component {
     
 
     async componentDidMount(){
-        const response = await fetch('/api/items');
-        const body = await response.json();
-        this.setState({
-            Items : body,
-            isLoading : false
-        });
+        UserService.getUserItems(this.state.user.id).then(
+            response =>{
+                this.setState({
+                    Items : response,
+                    isLoading : false
+                });
+                console.log(response)
+            },
+            error =>{
+                console.log(error);
+            }        
+        )        
 
         if (this.stateMessage) {
             console.log(this.stateMessage)
@@ -62,7 +71,7 @@ class Item extends Component {
                                             the card's content.
                                         </Card.Text>
                                     <Button className="produk-button" variant="primary">Lihat Produk</Button>
-                                    <Button className="produk-button" variant="warning">Edit Produk</Button>
+                                    <Button href="/user/item/edit/" className="produk-button" variant="warning">Edit Produk</Button>
                                     <Button className="produk-button" variant="danger">Hapus Produk</Button>
                                 </Card.Body>
                             </Card>

@@ -8,7 +8,6 @@ class TambahProduk extends Component {
         super(props);
         this.state = {
             successful: false,
-            userOwner: AuthService.getCurrentUser(),
             name: "",
             deskripsi: "",
             harga:"",
@@ -80,7 +79,7 @@ class TambahProduk extends Component {
             message: ""
         })
         if(this.formValidation(e)){
-            UserService.addProduct(this.state.name, this.state.deskripsi, this.state.harga,this.state.kategoriPilihan,this.state.userOwner).then(
+            UserService.addProduct(this.state.name, this.state.deskripsi, this.state.harga,this.state.kategoriPilihan).then(
                 response =>{
                     this.setState({
                         message: response.data,
@@ -175,4 +174,4 @@ class TambahProduk extends Component {
     }
 }
 
-export default (TambahProduk);
+export default TambahProduk;

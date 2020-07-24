@@ -5,39 +5,26 @@ const API_URL = 'http://localhost:8080/api/';
 
 class UserService {
   getCategories(userId){
-      return axios.get(API_URL + `carikom/categories`, {headers: authHeader()});
+      return axios.get(API_URL + `categories`, {headers: authHeader()});
   }
 
   addProduct(name, description, price, category, userOwner){
-    let id = 2;
-    if (userOwner.roles[0] === "ROLE_USER") {
-        id = 1;
-    }
     const req_data = {
         name : name,
         description : description,
         price : price, 
         isBought: 0,
-        userOwner : {
-            id : userOwner.id,
-            email : userOwner.email,
-            lokasi : userOwner.lokasi,
-            nama : userOwner.nama,
-            username : userOwner.username,
-            telepon : userOwner.telepon,
-            password : null,
-            roles : [
-                {
-                    id : id,
-                    name : userOwner.roles[0]
-                }
-            ]
-        },
         category : JSON.parse(category),
     }
-    console.log(req_data)
-    return axios.post(API_URL + "carikom/item", req_data, {headers: authHeader()});
-}
+    return axios.post(API_URL + "item", req_data, {headers: authHeader()});
+  }
+
+  getUserItems(id){
+    const headers = {
+      headers : authHeader()
+    };
+    return axios.get(`${API_URL}item/user/${id}?page=0`,headers);
+  }
 
   getUserBoard() {
     return axios.get(API_URL + 'user', { headers: authHeader() });

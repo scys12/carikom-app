@@ -15,7 +15,7 @@ class AppNav extends Component {
     }
 
     async componentDidMount(){
-        const response = await fetch('/api/carikom/categories');
+        const response = await fetch('/api/categories');
         const body = await response.json();
         this.setState({
             Categories : body
@@ -34,7 +34,7 @@ class AppNav extends Component {
         return (
             <Navbar>
                 <Navbar.Brand href="/">
-                    <img src="./images/brand.png" alt="brand"/>
+                    <img src="http://localhost:3000/images/brand.png" alt="brand"/>
                 </Navbar.Brand>
                 <Nav className="ml-auto">
                     <Nav.Link href="/">Home</Nav.Link>

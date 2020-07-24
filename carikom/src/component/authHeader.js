@@ -3,9 +3,10 @@ export default function authHeader(){
 
     if(user && user.token){
         return {
-            "Authorization" : `${user.type} ${user.token}`,
-            'Content-Type': 'application/json;charset=UTF-8',
-            "Access-Control-Allow-Origin": "*"
+            "Access-Control-Allow-Origin": "*",
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            "Authorization" : `${user.type} ${user.token}`
         };
     }else{
         return {};

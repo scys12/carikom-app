@@ -78,7 +78,6 @@ class Register extends Component {
         if(this.formValidation(e)){
             AuthService.register(this.state.username, this.state.email, this.state.password,this.state.nama, this.state.lokasi, this.state.telepon).then(
                 response =>{
-                    console.log("khh");
                     this.setState({
                         message: response.data.message,
                         successful: true
@@ -150,7 +149,6 @@ class Register extends Component {
     }
 
     render() { 
-        console.log(this.state.successful);
         let usernameErr, passwordErr, emailErr, namaErr, confirmPasswordErr, lokasiErr, teleponErr = null
         for (const err of this.state.errors) {
             if (err.elm === "username") {
