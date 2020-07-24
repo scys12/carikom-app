@@ -17,7 +17,7 @@ export default class Home extends Component {
                             <Row className="show-grid text-center">
                                 <div className="category-box">
                                     <a href="/">
-                                        <Image className="category-img" src="././images/motherboard.png" alt="motherboard"/>
+                                        <Image className="category-img" src="http://localhost:3000/images/motherboard.png" alt="motherboard"/>
                                     </a>
                                     <div className="category-div">
                                         <p>555 produk</p>
@@ -26,7 +26,7 @@ export default class Home extends Component {
                                 </div>
                                 <div className="category-box">
                                     <a href="/">
-                                        <Image className="category-img" src="././images/processor.png" alt="processor"/>
+                                        <Image className="category-img" src="http://localhost:3000/images/processor.png" alt="processor"/>
                                     </a>
                                     <div className="category-div">
                                         <p>555 produk</p>
@@ -35,7 +35,7 @@ export default class Home extends Component {
                                 </div>
                                 <div className="category-box">
                                     <a href="/">
-                                        <Image className="category-img" src="././images/ram.png" alt="ram"/>
+                                        <Image className="category-img" src="http://localhost:3000/images/ram.png" alt="ram"/>
                                     </a>
                                     <div className="category-div">
                                         <p>555 produk</p>
@@ -44,7 +44,7 @@ export default class Home extends Component {
                                 </div>
                                 <div className="category-box">
                                     <a href="/">
-                                        <Image className="category-img" src="././images/vga.png" alt="vga"/>
+                                        <Image className="category-img" src="http://localhost:3000/images/vga.png" alt="vga"/>
                                     </a>
                                     <div className="category-div">
                                         <p>555 produk</p>
@@ -53,7 +53,7 @@ export default class Home extends Component {
                                 </div>
                                 <div className="category-box">
                                     <a href="/">
-                                        <Image className="category-img" src="././images/storage.png" alt="storage"/>
+                                        <Image className="category-img" src="http://localhost:3000/images/storage.png" alt="storage"/>
                                     </a>
                                     <div className="category-div">
                                         <p>555 produk</p>
@@ -107,7 +107,7 @@ export default class Home extends Component {
                                     </Card>
                                 </div>
                             </Row>
-                            <Button style={{width:'100%'}}>Lihat Selengkapnya</Button>
+                            <Button style={{width:'100%'}}>Lihat Semua Produk</Button>
                         </Card.Body>
                     </Card>
                 </div>

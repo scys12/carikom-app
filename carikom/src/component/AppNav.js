@@ -4,6 +4,7 @@ import AuthService from './AuthService';
 import {withRouter} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faUserCircle} from '@fortawesome/free-solid-svg-icons';
+import UserService from './UserService';
 
 class AppNav extends Component {
     constructor(props) {
@@ -15,11 +16,15 @@ class AppNav extends Component {
     }
 
     async componentDidMount(){
-        const response = await fetch('/api/categories');
-        const body = await response.json();
-        this.setState({
-            Categories : body
-        })
+        UserService.getCategories().then(
+            response =>{
+                this.setState({
+                    Categories : response.data
+                })
+            },error => {
+                console.log(error)
+            }
+        )        
     }
 
     logout(e){
@@ -30,7 +35,6 @@ class AppNav extends Component {
 
     render() { 
         const {Categories, currentUser} = this.state;
-        console.log(currentUser)
         return (
             <Navbar>
                 <Navbar.Brand href="/">

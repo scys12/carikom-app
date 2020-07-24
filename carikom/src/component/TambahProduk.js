@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Form, Button, Container} from 'react-bootstrap'
-import AuthService from './AuthService'
 import UserService from './UserService';
 
 class TambahProduk extends Component {

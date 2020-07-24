@@ -64,7 +64,6 @@ public class ItemController {
     @GetMapping("/item/user/{userId}")
     Page<Item> getItemBasedOnUserOwner(@PathVariable(value = "userId") Long userId, Pageable pageable) {
         return itemRepository.findByUserId(userId, pageable);
-
     }
 
     @PostMapping("/item")
@@ -77,9 +76,12 @@ public class ItemController {
     }
 
     @PutMapping("/item/{id}")
-    ResponseEntity<Item> updateItem(@Valid @RequestBody Item item) {
-        Item itemResult = itemRepository.save(item);
-        return ResponseEntity.ok().body(itemResult);
+    Item updateItem(@PathVariable(value="id") Long id, @Valid @RequestBody Item item,Principal principal) {
+        Optional<User> userItem = userRepository.findByUsername(principal.getName());
+        return userItem.map( user -> {
+            item.setUser(user);
+            return itemRepository.save(item);
+        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/item/{id}")

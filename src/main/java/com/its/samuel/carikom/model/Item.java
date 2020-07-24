@@ -17,6 +17,7 @@ public class Item {
     private Long id;
     @NotNull
     private String name;
+    @Column(length = 512)
     private String description;
     private int price;
     private int isBought;
