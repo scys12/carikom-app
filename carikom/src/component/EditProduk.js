@@ -22,7 +22,7 @@ class EditProduk extends Component {
         UserService.getCategories().then(
             response =>{
                 this.setState({
-                    categories: response.data
+                    categories: response.data[0]
                 })
             },
             error => {                                        
@@ -153,7 +153,7 @@ class EditProduk extends Component {
             }
         }
         return (
-            <Container>                                
+            <Container>
                 <Form.Group controlId="exampleForm.ControlInput1">
                     <Form.Label>Nama Produk</Form.Label>
                     <Form.Control type="text" name="name" onChange={this.onDataChange.bind(this)} className="produk-input" placeholder="Nama Produk" value={this.state.name}/>
@@ -174,7 +174,7 @@ class EditProduk extends Component {
                     <Form.Control as="select" onChange = {this.onDataChange.bind(this)} name="kategoriPilihan">
                         {categories.map( kategori =>
                             <>
-                            <option selected={this.state.kategoriId === kategori.id} value={`{"id" : ${kategori.id}, "name" : "${kategori.name}"}`}  key={kategori.id}>{kategori.name}</option>
+                                <option selected={this.state.kategoriId === kategori.id} value={`{"id" : ${kategori.id}, "name" : "${kategori.name}"}`}  key={kategori.id}>{kategori.name}</option>
                             </>
                         )}
                     </Form.Control>

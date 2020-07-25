@@ -1,113 +1,99 @@
 import React, { Component } from 'react';
 import { Jumbotron, Container, Card, Row, Image, Button} from 'react-bootstrap';
-
+import UserService from './UserService';
+import Slider from 'react-slick'
 export default class Home extends Component {
-    state = {  }
+    state = {
+        Categories : [],
+        size: [],
+        product: []
+    }
+
+    async componentDidMount(){
+        UserService.getCategories().then(
+            response =>{
+                this.setState({
+                    Categories : response.data[0],
+                    size : response.data[1]
+                })
+            },error => {
+                console.log(error)
+            }
+        );
+        UserService.getLatestProduct().then(
+            response =>{
+                this.setState({product : response.data})
+            },
+            error =>{
+                console.log(error);
+            }
+        )
+    }
+
     render() { 
+        let categories = this.state.Categories;
+        let size = this.state.size;
+        categories.map( (category, index) =>        
+            category.size = size[index]
+        )
+        let products = this.state.product;
+        const settings = {
+            infinite: true,
+            speed: 500,
+            slidesToShow: 3,
+            slidesToScroll: 3
+        };
+        products.map(product =>
+            console.log(product.name)
+        )
         return ( 
-            <Container>
+            <Container>                
                 <Jumbotron>
                     <h2>Selamat datang di CariKom</h2>
                     <p>Toko perlengkapan produk komputer terbaik!</p>
                 </Jumbotron>
                 <div className="show-grid">
+                    
                     <Card className="card-home">
                         <Card.Header as="h5">Kategori</Card.Header>
                         <Card.Body>
                             <Row className="show-grid text-center">
-                                <div className="category-box">
-                                    <a href="/">
-                                        <Image className="category-img" src="http://localhost:3000/images/motherboard.png" alt="motherboard"/>
-                                    </a>
-                                    <div className="category-div">
-                                        <p>555 produk</p>
-                                        <a className="category-title" href="/">Motherboard</a>
+                                {categories.map(category =>
+                                    <div className="category-box" key={category.id}>
+                                        <a href="/">
+                                            <Image className="category-img" src={`http://localhost:3000/images/${category.name}.png`} alt={`${category.name}`} />
+                                        </a>
+                                        <div className="category-div">
+                                            <p>{category.size} produk</p>
+                                            <a className="category-title" href={`/category/${category.id}`}>{category.name}</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="category-box">
-                                    <a href="/">
-                                        <Image className="category-img" src="http://localhost:3000/images/processor.png" alt="processor"/>
-                                    </a>
-                                    <div className="category-div">
-                                        <p>555 produk</p>
-                                        <a className="category-title" href="/">Processor</a>
-                                    </div>
-                                </div>
-                                <div className="category-box">
-                                    <a href="/">
-                                        <Image className="category-img" src="http://localhost:3000/images/ram.png" alt="ram"/>
-                                    </a>
-                                    <div className="category-div">
-                                        <p>555 produk</p>
-                                        <a className="category-title" href="/">RAM</a>
-                                    </div>
-                                </div>
-                                <div className="category-box">
-                                    <a href="/">
-                                        <Image className="category-img" src="http://localhost:3000/images/vga.png" alt="vga"/>
-                                    </a>
-                                    <div className="category-div">
-                                        <p>555 produk</p>
-                                        <a className="category-title" href="/">VGA</a>
-                                    </div>
-                                </div>
-                                <div className="category-box">
-                                    <a href="/">
-                                        <Image className="category-img" src="http://localhost:3000/images/storage.png" alt="storage"/>
-                                    </a>
-                                    <div className="category-div">
-                                        <p>555 produk</p>
-                                        <a className="category-title" href="/">Storage</a>
-                                    </div>
-                                </div>
+                                )}                                
                             </Row>
                         </Card.Body>
                     </Card>
                     <Card className="card-home">
-                        <Card.Header as="h5">Item</Card.Header>
+                        <Card.Header as="h5">Produk Terbaru</Card.Header>
                         <Card.Body>
-                            <Row className="show-grid text-center">
-                                <div className="item-wrapper">
-                                    <Card>
-                                        <div className="text-center"><Card.Img variant="top" src="././images/storage.png" className="item-img" /></div>
-                                        <Card.Body>
-                                            <Card.Title>Card Title</Card.Title>
-                                                <Card.Text>
-                                                    Some quick example text to build on the card title and make up the bulk of
-                                                    the card's content.
-                                                </Card.Text>
-                                            <Button variant="primary">Lihat Selengkapnya</Button>
-                                        </Card.Body>
-                                    </Card>
-                                </div>
-                                <div className="item-wrapper">
-                                    <Card>
-                                        <div className="text-center"><Card.Img variant="top" src="././images/storage.png" className="item-img" /></div>
-                                        <Card.Body>
-                                            <Card.Title>Card Title</Card.Title>
-                                                <Card.Text>
-                                                    Some quick example text to build on the card title and make up the bulk of
-                                                    the card's content.
-                                                </Card.Text>
-                                            <Button variant="primary">Lihat Selengkapnya</Button>
-                                        </Card.Body>
-                                    </Card>
-                                </div>
-                                <div className="item-wrapper">
-                                    <Card>
-                                        <div className="text-center"><Card.Img variant="top" src="././images/storage.png" className="item-img" /></div>
-                                        <Card.Body>
-                                            <Card.Title>Card Title</Card.Title>
-                                                <Card.Text>
-                                                    Some quick example text to build on the card title and make up the bulk of
-                                                    the card's content.
-                                                </Card.Text>
-                                            <Button variant="primary">Lihat Selengkapnya</Button>
-                                        </Card.Body>
-                                    </Card>
-                                </div>
-                            </Row>
-                            <Button style={{width:'100%'}}>Lihat Semua Produk</Button>
+                            <div className="show-grid text-center">
+                                <Slider {...settings}>
+                                    {products.map(product =>
+                                        <div className="item-wrapper">
+                                            <Card style={{margin:"0 20px"}}>
+                                                <div className="text-center" style={{margin:"20px auto"}}><Card.Img variant="top" src={`http://localhost:3000/images/${product.category.name}.png`} className="item-img" /></div>                                        
+                                                <Card.Body>
+                                                    <Card.Title>{product.name}</Card.Title>
+                                                        <Card.Text>
+                                                            {product.description}
+                                                        </Card.Text>
+                                                    <Button variant="primary">Lihat Selengkapnya</Button>
+                                                </Card.Body>
+                                            </Card>
+                                        </div>
+                                    )}
+                                </Slider>
+                            </div>
+                            <Button variant="secondary" style={{width:'100%'}}>Lihat Semua Produk</Button>
                         </Card.Body>
                     </Card>
                 </div>

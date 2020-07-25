@@ -3,9 +3,13 @@ import authHeader from './authHeader';
 
 const API_URL = 'http://localhost:8080/api/';
 
+const headers = {
+  headers : authHeader()
+};
+
 class UserService {
   getCategories(userId){
-      return axios.get(API_URL + `categories`, {headers: authHeader()});
+      return axios.get(API_URL + `categories`);
   }
 
   addProduct(name, description, price, category){
@@ -16,7 +20,7 @@ class UserService {
       isBought: 0,
       category : JSON.parse(category),
     }
-    return axios.post(API_URL + "item", req_data, {headers: authHeader()});
+    return axios.post(API_URL + "item", req_data, headers);
   }
 
   editProduct(name, description, price, category,id){
@@ -28,13 +32,11 @@ class UserService {
       isBought: 0,
       category : JSON.parse(category),
     }
-    return axios.put(`${API_URL}item/${id}`, req_data, {headers: authHeader()});
+    return axios.put(`${API_URL}item/${id}`, req_data, headers);
   }
 
   getUserItems(id,page){
-    const headers = {
-      headers : authHeader()
-    };
+    
     return axios.get(`${API_URL}item/user/${id}?page=${page}&size=9`,headers);
   }
 
@@ -52,16 +54,20 @@ class UserService {
     return axios.get(`${API_URL}item/${id}`,headers);
   }
 
+  getLatestProduct(){
+    return axios.get(`${API_URL}latestitem`);
+  }
+
   getUserBoard() {
-    return axios.get(API_URL + 'user', { headers: authHeader() });
+    return axios.get(API_URL + 'user', headers);
   }
 
   getModeratorBoard() {
-    return axios.get(API_URL + 'mod', { headers: authHeader() });
+    return axios.get(API_URL + 'mod', headers);
   }
 
   getAdminBoard() {
-    return axios.get(API_URL + 'admin', { headers: authHeader() });
+    return axios.get(API_URL + 'admin', headers);
   }
 }
 

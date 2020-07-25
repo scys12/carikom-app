@@ -73,7 +73,7 @@ nav.navbar .navbar-nav a.nav-link:hover, nav .navbar-nav a.dropdown-toggle.nav-l
 .btn-secondary{
     background-color: white;
     color: #2892D7;
-    border: 1px solid white;
+    border: 1px solid #2892D7;
 }
 
 .btn-secondary:hover{
@@ -303,7 +303,7 @@ h3 {
 }
 
 .pwd-medium {
-    background-color: #3498db;
+    background-color: #2892D7;
 }
 
 .pwd-strong {
@@ -337,7 +337,7 @@ h3 {
 }
 
 .pagination li.active a{
-    background: #3498db;
+    background: #2892D7;
     color: white;
 }
 
@@ -370,13 +370,13 @@ h3 {
 
 .user-item-category{
     font-size: 18px;
-    color: #3498db;
+    color: #2892D7;
     font-weight: 600;
 }
 
 .user-item-price .price-text{
     font-size: 18px;
-    color: #3498db;
+    color: #2892D7;
     font-weight: 600;
     padding-right: 20px;
 }
@@ -402,7 +402,7 @@ h3 {
 
 .user-item-description .description-title{
     font-size: 25px;
-    color: #3498db;
+    color: #2892D7;
     font-weight: 600;
     text-align: center;
 }
@@ -412,4 +412,49 @@ h3 {
     font-size: 18px;
     color: #ababab;
     font-weight: 500;
+}
+
+nav.navbar #navbar-profile .dropdown .dropdown-menu{
+    right: 0;
+    left: initial;
+}
+
+.slick-next:before, .slick-prev:before {
+    color: #2892D7;
+}
+
+.show-grid{
+    padding: 0 20px;
+    font-size: 25px;
+}
+
+.card-header{
+    background-color: #3498db;
+    color: white;
+}
+
+.card{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px;
+    border-radius: 8px;
+    border-color: rgb(255, 255, 255);
+}
+
+.produk-header{
+    float: left;
+    margin: 7px 0;
+    font-size: 20px;
+}
+
+.form-wrapper{
+    margin-top: 50px;
+    padding: 30px;
+    border-color: 1px solid rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px;
+    border-radius: 8px;
+}
+
+.form-title h5{    
+    color: #212529;
+    font-weight: 500;
+    font-size: 30px;
 }

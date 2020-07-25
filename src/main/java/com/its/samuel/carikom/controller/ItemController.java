@@ -89,4 +89,10 @@ public class ItemController {
         itemRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/latestitem")
+    List<Item> getLatestItem(Pageable pageable){
+        List<Item> items = itemRepository.findByIsBoughtOrderByIdDesc();
+        return items;
+    }
 }

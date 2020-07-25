@@ -8,6 +8,7 @@ import TambahProduk from './component/TambahProduk';
 import EditProduk from './component/EditProduk';
 import UserItem from './component/UserItem';
 import ItemDetail from './component/ItemDetail';
+import EditProfile from './component/EditProfile';
 
 class App extends Component {
     state = {  }
@@ -24,6 +25,7 @@ class App extends Component {
                         <Route exact path="/user/item/edit/:id" component={EditProduk}/>
                         <Route exact path="/user/item/:id" component={ItemDetail}/>
                         <Route exact path="/user/profile" component={UserDashboard}/>
+                        <Route exact path="/user/edit" component={EditProfile}/>
                     </Switch>
                 </div>
             </Router>

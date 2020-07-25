@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AuthService from './AuthService'
-import { Container, Card} from 'react-bootstrap';
+import { Container, Card, Button} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faUser} from '@fortawesome/free-solid-svg-icons';
 
@@ -15,7 +15,10 @@ export default class UserDashboard extends Component {
         return ( 
             <Container>
                 <Card>
-                    <Card.Header>Profile</Card.Header>
+                    <Card.Header>
+                        <p className="produk-header">Profile</p>
+                        <Button variant="warning" style={{float: "right", color: "white"}} href="/user/edit">Edit Profile</Button>
+                    </Card.Header>
                     <div className="text-center mt-5">
                         <FontAwesomeIcon icon={faUser} size="10x" color="#3498db"/>
                     </div>

@@ -37,6 +37,7 @@ public class Item {
     private User user;
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private Category category;
 

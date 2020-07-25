@@ -98,8 +98,12 @@ class UserItem extends Component {
                         {this.state.message}
                     </Alert>
                 )}
-                <Breadcrumb><Button variant="success" href="/user/item/tambah">Tambah Produk</Button></Breadcrumb>
-                <div style={{backgroundColor: "#e9ecef", padding: "20px"}}>
+                <Card className="card-home">
+                    <Card.Header>
+                        <p className="produk-header">Produk</p>
+                        <Button variant="success" style={{float: "right"}} href="/user/item/tambah">Tambah Produk</Button>
+                    </Card.Header>
+                    <Card.Body>
                     <Row className="show-grid text-center">
                             {itemContent.map(item =>
                                 <div key={item.id} className="item-wrapper">
@@ -125,7 +129,8 @@ class UserItem extends Component {
                                 </div>
                             )}
                     </Row>
-                </div>
+                    </Card.Body>
+                </Card>
                 {totalPages > 1 && (
                     <div className="d-flex flex-row py-4 justify-content-center">
                         <Pagination hideNavigation                        

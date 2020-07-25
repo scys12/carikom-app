@@ -19,7 +19,7 @@ class AppNav extends Component {
         UserService.getCategories().then(
             response =>{
                 this.setState({
-                    Categories : response.data
+                    Categories : response.data[0]
                 })
             },error => {
                 console.log(error)
@@ -28,6 +28,7 @@ class AppNav extends Component {
     }
 
     logout(e){
+        e.preventDefault();
         AuthService.logout();
         this.props.history.push("/");
         window.location.reload();
@@ -53,11 +54,11 @@ class AppNav extends Component {
                     </NavDropdown>
                 </Nav>
                 {currentUser ? (
-                    <Nav className="ml-5 mr-5" style={{position:"relative", marginLeft:"40px"}}>                        
+                    <Nav className="ml-5 mr-5" id="navbar-profile" style={{position:"relative", marginLeft:"40px"}}>                        
                         <NavDropdown title={currentUser.nama} id="collasible-nav-dropdown" alt="logo">
                             <NavDropdown.Item key={1} href="/user/profile">Profil</NavDropdown.Item>
                             <NavDropdown.Item key={2} href="/user/item">Item</NavDropdown.Item>
-                            <NavDropdown.Item key={3} onClick = {this.logout.bind(this)}>Keluar</NavDropdown.Item>
+                            <NavDropdown.Item key={3} href="/user/logout" onClick = {this.logout.bind(this)}>Keluar</NavDropdown.Item>
                         </NavDropdown>
                         <div className="icon-navbar"><FontAwesomeIcon icon={faUserCircle} size="1x" color="white"/></div>
                     </Nav>
