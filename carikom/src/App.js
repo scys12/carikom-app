@@ -9,25 +9,30 @@ import EditProduk from './component/EditProduk';
 import UserItem from './component/UserItem';
 import ItemDetail from './component/ItemDetail';
 import EditProfile from './component/EditProfile';
+import SearchResult from './component/SearchResult';
+import AllProducts from './component/AllProducts';
+import AuthRequiredRoute from './AuthRequiredRoute';
 
 class App extends Component {
     state = {  }
     render() { 
         return ( 
             <Router>
-                <div>
+                <>
                     <AppNav/>
                     <Switch>
                         <Route exact path="/" component={Home}/> 
-                        <Route exact path="/user/item" component={UserItem}/>
+                        <Route exact path="/search" component={SearchResult}/>
+                        <Route exact path="/items" component={AllProducts}/>
                         <Route exact path="/auth" component={Auth}/>
-                        <Route exact path="/user/item/tambah" component={TambahProduk}/>
-                        <Route exact path="/user/item/edit/:id" component={EditProduk}/>
-                        <Route exact path="/user/item/:id" component={ItemDetail}/>
-                        <Route exact path="/user/profile" component={UserDashboard}/>
-                        <Route exact path="/user/edit" component={EditProfile}/>
+                        <AuthRequiredRoute path="/user/item" component={UserItem}/>
+                        <AuthRequiredRoute exact path="/user/item/tambah" component={TambahProduk}/>
+                        <AuthRequiredRoute exact path="/user/item/edit/:id" component={EditProduk}/>
+                        <AuthRequiredRoute exact path="/user/item/:id" component={ItemDetail}/>
+                        <AuthRequiredRoute exact path="/user/profile" component={UserDashboard}/>
+                        <AuthRequiredRoute exact path="/user/edit" component={EditProfile}/>
                     </Switch>
-                </div>
+                </>
             </Router>
          );
     }

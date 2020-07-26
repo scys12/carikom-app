@@ -23,7 +23,7 @@ class UserService {
     return axios.post(API_URL + "item", req_data, headers);
   }
 
-  editProduct(name, description, price, category,id){
+  editProduct(name, description, price, category, id){
     const req_data = {
       id : id,
       name : name,
@@ -32,11 +32,35 @@ class UserService {
       isBought: 0,
       category : JSON.parse(category),
     }
-    return axios.put(`${API_URL}item/${id}`, req_data, headers);
+    return axios.put(`${API_URL}item/edit`, req_data, headers);
   }
 
-  getUserItems(id,page){
-    
+  search(searchInput, type, page){
+    console.log(page)
+    return axios.get(`${API_URL}search?type=${type}&searchWord=${searchInput}&page=${page}&size=9`);
+  }
+
+  editProfile(username, email, nama, lokasi, telepon, password){
+    const request_data = {
+      username : username,
+      email : email,
+      nama: nama,
+      lokasi : lokasi,
+      telepon : telepon,
+      password : password
+    }
+    return axios.put(`${API_URL}user/edit`, request_data, headers).then(
+      response => {
+        if (response.data.token) {
+            localStorage.removeItem("user");
+            localStorage.setItem("user", JSON.stringify(response.data));
+        }
+        return response.data;
+      }
+    );
+  }
+
+  getUserItems(id,page){    
     return axios.get(`${API_URL}item/user/${id}?page=${page}&size=9`,headers);
   }
 
@@ -44,7 +68,7 @@ class UserService {
     const headers = {
       headers : authHeader()
     };
-    return axios.delete(`${API_URL}item/${id}`,headers);
+    return axios.delete(`${API_URL}item/delete/${id}`,headers);
   }
 
   getItemDetail(id){
@@ -58,16 +82,8 @@ class UserService {
     return axios.get(`${API_URL}latestitem`);
   }
 
-  getUserBoard() {
-    return axios.get(API_URL + 'user', headers);
-  }
-
-  getModeratorBoard() {
-    return axios.get(API_URL + 'mod', headers);
-  }
-
-  getAdminBoard() {
-    return axios.get(API_URL + 'admin', headers);
+  getAllItems(page){
+    return axios.get(`${API_URL}items?page=${page}&size=12`);
   }
 }
 

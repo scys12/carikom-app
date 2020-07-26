@@ -31,6 +31,7 @@ export default class Home extends Component {
     }
 
     render() { 
+        console.log(this.props)
         let categories = this.state.Categories;
         let size = this.state.size;
         categories.map( (category, index) =>        
@@ -43,9 +44,6 @@ export default class Home extends Component {
             slidesToShow: 3,
             slidesToScroll: 3
         };
-        products.map(product =>
-            console.log(product.name)
-        )
         return ( 
             <Container>                
                 <Jumbotron>

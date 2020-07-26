@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Nav,NavDropdown, Navbar,Button} from 'react-bootstrap'
+import {Nav,NavDropdown, Navbar,Button, FormControl, Form} from 'react-bootstrap'
 import AuthService from './AuthService';
 import {withRouter} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,7 +11,11 @@ class AppNav extends Component {
         super(props)
         this.state = {
             Categories: [],
-            currentUser: AuthService.getCurrentUser()
+            currentUser: AuthService.getCurrentUser(),
+            searchText: "",
+            searchResult: [],
+            isRedirect : false,
+            fixText : ''
         };
     }
 
@@ -34,6 +38,22 @@ class AppNav extends Component {
         window.location.reload();
     }
 
+    handleSearchInput(e){
+        const attVal = e.target.value;
+        this.setState({searchText : attVal});
+    }
+
+    handleSearchSubmit(e){
+        e.preventDefault()
+        const type = "product";
+        this.props.history.push({
+            pathname: '/search',
+            search: `?type=${type}&searchWord=${this.state.searchText}`
+        });
+        console.log(this.props)
+        window.location.reload()
+    }
+
     render() { 
         const {Categories, currentUser} = this.state;
         return (
@@ -42,9 +62,20 @@ class AppNav extends Component {
                     <img src="http://localhost:3000/images/brand.png" alt="brand"/>
                 </Navbar.Brand>
                 <Nav className="ml-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
+                    <Form inline className="mr-5" method="get" onSubmit={this.handleSearchSubmit.bind(this)} >
+                        <FormControl
+                            onChange={this.handleSearchInput.bind(this)}
+                            type="text"
+                            placeholder="Search"
+                            className="mr-sm-2"
+                            style={{width:'350px'}}
+                            required={true}
+                        />
+                        <Button type="submit" variant="outline-primary">
+                            Search
+                        </Button>                        
+                    </Form>
                     <Nav.Link href="/items">Produk</Nav.Link>
-                    <Nav.Link href="/about">Tentang Kami</Nav.Link>
                     <NavDropdown title="Kategori" id="collasible-nav-dropdown" alt="logo">
                         {
                             Categories.map( category =>
@@ -57,7 +88,7 @@ class AppNav extends Component {
                     <Nav className="ml-5 mr-5" id="navbar-profile" style={{position:"relative", marginLeft:"40px"}}>                        
                         <NavDropdown title={currentUser.nama} id="collasible-nav-dropdown" alt="logo">
                             <NavDropdown.Item key={1} href="/user/profile">Profil</NavDropdown.Item>
-                            <NavDropdown.Item key={2} href="/user/item">Item</NavDropdown.Item>
+                            <NavDropdown.Item key={2} href="/user/item">Produk</NavDropdown.Item>
                             <NavDropdown.Item key={3} href="/user/logout" onClick = {this.logout.bind(this)}>Keluar</NavDropdown.Item>
                         </NavDropdown>
                         <div className="icon-navbar"><FontAwesomeIcon icon={faUserCircle} size="1x" color="white"/></div>

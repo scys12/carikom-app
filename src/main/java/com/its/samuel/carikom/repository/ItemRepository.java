@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
+    Page<Item> findByIsBought(Integer isBought, Pageable pageable);
     Page<Item> findByUserId(Long userId, Pageable pageable);
-//    Optional<Item> findByUserOwnerAndName(Long userOwner, String name);
-//    Optional<Item> findByUserOwnerAndCategory(Long userOwner, Long category);
+    Page<Item> findByNameContainingAndIsBought(String name, Integer isBought, Pageable pageable);
     Optional<Item> findByName(String name);
     Optional<Item> findByCategory(Category category);
     Long countByCategoryId(Long categoryId);

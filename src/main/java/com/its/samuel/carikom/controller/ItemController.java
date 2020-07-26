@@ -35,9 +35,8 @@ public class ItemController {
     private UserRepository userRepository;
 
     @GetMapping("/items")
-    Collection<Item> items() {
-        return itemRepository.findAll();
-        //select * from item
+    Page<Item> items(Pageable pageable) {
+        return itemRepository.findByIsBought(0, pageable);
     }
 
     @GetMapping("/item/{id}")
@@ -75,8 +74,8 @@ public class ItemController {
         }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    @PutMapping("/item/{id}")
-    Item updateItem(@PathVariable(value="id") Long id, @Valid @RequestBody Item item,Principal principal) {
+    @PutMapping("/item/edit")
+    Item updateItem(@Valid @RequestBody Item item,Principal principal) {
         Optional<User> userItem = userRepository.findByUsername(principal.getName());
         return userItem.map( user -> {
             item.setUser(user);
@@ -84,7 +83,7 @@ public class ItemController {
         }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/item/{id}")
+    @DeleteMapping("/item/delete/{id}")
     ResponseEntity<Item> deleteItem(@PathVariable Long id) {
         itemRepository.deleteById(id);
         return ResponseEntity.ok().build();

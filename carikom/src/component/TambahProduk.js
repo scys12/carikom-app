@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Form, Button, Container} from 'react-bootstrap'
 import UserService from './UserService';
+import { Redirect } from 'react-router-dom';
 
 class TambahProduk extends Component {
     constructor(props) {
@@ -83,14 +84,7 @@ class TambahProduk extends Component {
                     this.setState({
                         message: response.data,
                         successful: true
-                    });
-                    this.props.history.push({
-                        pathname: "/user/item",
-                        state: {
-                            message : "Produk berhasil ditambahkan"
-                        }
-                    });
-                    window.location.reload();
+                    });                    
                 },
                 error => {
                     this.setState({
@@ -134,7 +128,6 @@ class TambahProduk extends Component {
                 hargaErr = error.msg
             }
         }
-        const successful = this.state.successful;
         return (
             <Container>
                 <div className="form-wrapper">
@@ -173,6 +166,15 @@ class TambahProduk extends Component {
                             <span>Tambah Produk</span>
                         </Button>
                     </div>
+                    {this.state.successful &&
+                        <Redirect to={{
+                            pathname: `/user/item`,                            
+                            state: {
+                                type : "success",
+                                message : "Produk berhasil ditambahkan"
+                            }
+                        }}/>
+                    }
                 </div>
             </Container>
         );

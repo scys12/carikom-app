@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button} from 'react-bootstrap'
+import {Button, Alert} from 'react-bootstrap'
 import AuthService from './AuthService'
 import {withRouter} from 'react-router-dom'
 
@@ -11,7 +11,9 @@ class Login extends Component {
             password: "",
             loading: false,
             errors: [],
-            message: ""
+            message: "",
+            messageAlert : "",
+            showAlertNotification : true
         };
     }
 
@@ -85,6 +87,27 @@ class Login extends Component {
         }
         this.clearValidationErr(String(attName))
     }
+
+    componentDidMount(){
+        if (typeof this.props.location.state != "undefined") {
+            console.log("AKU")
+            this.setState({messageAlert:this.props.location.state.message})
+            setTimeout(() => {
+                this.setState({
+                    messageAlert : '',
+                    showAlertNotification : false
+                })
+                this.props.history.push({
+                    pathname: "/auth",
+                    state: {
+                        message: "",
+                        type: ""
+                    }
+                });
+            }, 3000);
+        }
+    }
+
     render() { 
         let userNameErr, passwordErr = null;
         for (const error of this.state.errors) {
@@ -95,9 +118,13 @@ class Login extends Component {
                 passwordErr = error.msg
             }
         }
-        console.log(userNameErr)
         return ( 
             <div className="inner-container">
+                {(this.state.messageAlert && this.state.showAlertNotification) &&( 
+                    <Alert key="1" variant="danger">
+                        {this.state.messageAlert}
+                    </Alert>
+                )}
                 <div className="header">
                     Masuk
                 </div>

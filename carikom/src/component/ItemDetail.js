@@ -45,7 +45,7 @@ class ItemDetail extends Component {
                             <Card.Text className="user-item-price">
                                 <span className="price-text">Harga</span><span className="price-total">Rp {content.price}</span>
                             </Card.Text>
-                            {(this.state.user.username === content.user.username) && 
+                            {(this.state.user.username !== content.user.username) && 
                                 <div className="button-beli"><Button variant="primary">Beli Sekarang</Button></div>
                             }
                         </div>                        

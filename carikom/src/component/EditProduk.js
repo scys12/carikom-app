@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Form, Button, Container} from 'react-bootstrap'
 import UserService from './UserService';
+import { Redirect } from 'react-router-dom';
 
 class EditProduk extends Component {
     constructor(props) {
@@ -102,13 +103,6 @@ class EditProduk extends Component {
                         message: response.data,
                         successful: true
                     });
-                    this.props.history.push({
-                        pathname: "/user/item",
-                        state: {
-                            message : "Produk berhasil diedit"
-                        }
-                    });
-                    window.location.reload();
                 },
                 error => {
                     this.setState({
@@ -187,6 +181,15 @@ class EditProduk extends Component {
                         <span>Edit Produk</span>
                     </Button>
                 </div>
+                {this.state.successful &&
+                    <Redirect to={{
+                        pathname: `/user/item`,                            
+                        state: {
+                            type : "warning",
+                            message : "Produk berhasil diubah"
+                        }
+                    }}/>
+                }
             </Container>
         );
     }

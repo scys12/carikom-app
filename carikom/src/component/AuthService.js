@@ -28,12 +28,15 @@ class AuthService{
             telepon : telepon,
             roles : ["user"]
         }
-        console.log(request_data);
         return axios.post(API_URL + "signup", request_data);
     }
 
     getCurrentUser(){
         return JSON.parse(localStorage.getItem("user"));
+    }
+    
+    isAuthenticated(){
+        return JSON.parse(localStorage.getItem("user")) === "undefined";
     }
 }
 

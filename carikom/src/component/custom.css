@@ -458,3 +458,71 @@ nav.navbar #navbar-profile .dropdown .dropdown-menu{
     font-weight: 500;
     font-size: 30px;
 }
+
+.navbar .navbar-nav .search-bar{
+    display: flex;
+    flex-flow: inherit;
+    align-items: center;
+}
+
+.button-toggle-search,.search-result{
+    padding: 10px;
+    margin: 20px 20px;
+}
+
+.button-toggle-search svg{
+    margin-right: 10px;
+    color: #3e3e42;
+}
+
+.button-toggle-search{
+    color: #3e3e42;
+    border: transparent;    
+}
+
+.button-toggle-search.active span,.button-toggle-search.active svg{
+    color: #2892D7;
+}
+
+.button-toggle-search.active{
+    background-color: transparent !important;
+    border: transparent !important;
+    box-shadow: none !important;
+    border-bottom: 2px solid #2892D7 !important;
+    border-radius: 0px;
+}
+
+.button-toggle-search.btn-secondary:focus{
+    border: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.no-result{
+    margin: 200px auto;
+    font-style: italic;
+    color: #ababab;
+}
+
+.item-card-img{
+    position: relative;
+}
+.item-card-img::after{
+    left: 0;
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: #3d3e40;
+    opacity: 0.7;
+}
+
+.item-bought{
+    position: absolute;
+    right: 33%;
+    top: 33%;
+    color: white;
+    font-size: 39px;
+    z-index: 5;
+    text-align: center;
+}
