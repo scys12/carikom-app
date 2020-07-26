@@ -53,12 +53,11 @@ class ProductsCategory extends Component {
             { id: '5', value: "Storage" },
         ];
         let valueHeader = null
-        categories.map( category =>{
+        categories.map( category => {
             if(category.id == this.props.match.params.id){
-                valueHeader = category.value
+                valueHeader = category.value;
             }
         });
-        console.log(valueHeader)
         return ( 
             <Container>
                 <Card className="card-home">
@@ -70,7 +69,7 @@ class ProductsCategory extends Component {
                             {this.state.items.length > 0  && this.state.items.map(item =>
                                 <div key={item.id} className="item-wrapper">
                                     <Card>
-                                        <div className="text-center"><a href={`/user/profile/${item.user.username}`} className="seller-section"><FontAwesomeIcon icon={faUserTag} size="1px"/> {item.user.username} </a><Card.Img variant="top" src={`http://localhost:3000/images/${item.category.name}.png`} className="item-img" /></div>
+                                        <div className="text-center"><a href={`/user/profile/${item.user.username}`} className="seller-section"><FontAwesomeIcon icon={faUserTag} size="1x"/> {item.user.username} </a><Card.Img variant="top" src={`http://localhost:3000/images/${item.category.name}.png`} className="item-img" /></div>
                                         <Card.Body>
                                             <Card.Title><strong>{item.name}</strong></Card.Title>
                                             <Card.Subtitle className="mb-2 text-muted">[{item.category.name}]</Card.Subtitle>

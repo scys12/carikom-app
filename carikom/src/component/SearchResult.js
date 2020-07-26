@@ -143,14 +143,14 @@ class SearchResult extends Component {
                                         {user.username}
                                     </Card.Text>
                                     <hr/>
-                                    <Button href={`/user/item/${user.id}`} className="produk-button" variant="primary">Lihat Produk Penjual</Button>
+                                    <Button href={`/user/${user.id}/item`} className="produk-button" variant="primary">Lihat Produk Penjual</Button>
                                     <Button href={`/user/profile/${user.id}`} className="produk-button" variant="secondary">Lihat Profil</Button>
                                 </Card.Body>
                             </Card>
                         </div>
                     )}
                     {(this.state.searchResult.length === 0) &&
-                        <div className="no-result">Tidak ada produk yang sesuai dengan pencarian</div>
+                        <div className="no-result">Tidak ada {this.state.type} yang sesuai dengan pencarian</div>
                     }
                 </Row>
                 {this.state.totalPages > 1 && (

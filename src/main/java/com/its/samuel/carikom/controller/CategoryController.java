@@ -22,12 +22,12 @@ public class CategoryController {
     private ItemRepository itemRepository;
 
     @GetMapping("/categories")
-    ArrayList categories() throws JsonProcessingException {
+    ArrayList categories(){
         List<Long> totalCategory = new ArrayList();
         List<Category> categories = categoryRepository.findAll();
         ArrayList totalElement = new ArrayList();
         categories.stream().forEach(category -> {
-            totalCategory.add(itemRepository.countByCategoryId(category.getId()));
+            totalCategory.add(itemRepository.countByCategoryIdAndIsBought(category.getId(), 0));
         });
         totalElement.add(categories);
         totalElement.add(totalCategory);

@@ -96,7 +96,7 @@ public class AuthController {
 
         user.setRoles(roles);
         userRepository.save(user);
-        return ResponseEntity.ok("User berhasil ditambahkan! Sekarang anda dapat masuk melalui akun anda yang baru dibuat");
+        return ResponseEntity.ok(new MessageResponse("User berhasil ditambahkan! Sekarang anda dapat masuk melalui akun anda yang baru dibuat"));
     }
 
     @PutMapping("/user/edit")

@@ -12,10 +12,11 @@ import java.util.Optional;
 public interface ItemRepository extends JpaRepository<Item, Long> {
     Page<Item> findByIsBought(Integer isBought, Pageable pageable);
     Page<Item> findByUserId(Long userId, Pageable pageable);
+    Page<Item> findByUserIdAndIsBought(Long userId, Integer isBought, Pageable pageable);
     Page<Item> findByNameContainingAndIsBought(String name, Integer isBought, Pageable pageable);
     Optional<Item> findByName(String name);
-    Page<Item> findByCategoryId(Long categoryId, Pageable pageable);
-    Long countByCategoryId(Long categoryId);
+    Page<Item> findByCategoryIdAndIsBought(Long categoryId, Integer isBought, Pageable pageable);
+    Long countByCategoryIdAndIsBought(Long categoryId, Integer isBought);
     Page<Item> findByUserIdAndNameContainingAndIsBought(Long userId, String name, Integer isBought, Pageable pageable);
     Page<Item> findByUserIdAndNameContainingAndIsBoughtAndCategoryId(Long userId, String name, Integer isBought, Long categoryId, Pageable pageable);
     @Query(value = "select * from items where is_bought = 0 order by id desc limit 6", nativeQuery = true)

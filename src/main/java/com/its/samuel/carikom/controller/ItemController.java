@@ -43,31 +43,21 @@ public class ItemController {
     ResponseEntity<?> getItem(@PathVariable Long id) {
         Optional<Item> item = itemRepository.findById(id);
         return item.map(response -> ResponseEntity.ok().body(response))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produk tidak ditemukan"));
     }
 
     @GetMapping("/category/item/{categoryId}")
     Page<Item> getItemsBasedOnCategory(@PathVariable Long categoryId, Pageable pageable) {
-        return itemRepository.findByCategoryId(categoryId, pageable);
+        return itemRepository.findByCategoryIdAndIsBought(categoryId, 0, pageable);
     }
 
-//    @GetMapping("/carikom/item/{userOwner}/{name}")
-//    ResponseEntity<?> getItemBasedOnItemName(@PathVariable Long userOwner, @PathVariable String name) {
-//        Optional<Item> item = itemRepository.findByName(name);
-//        return item.map(response -> ResponseEntity.ok().body(response))
-//                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-//    }
-
-//    @GetMapping("/carikom/item/{userOwner}/{category}")
-//    ResponseEntity<?> getItemBasedOnCategory(@PathVariable Long userOwner, @PathVariable Long category) {
-//        Collection<Item> item = itemRepository.findByUserOwnerAndCategory(userOwner, category);
-//        return item.stream().map(response -> ResponseEntity.ok().body(response))
-//
-//    }
-
     @GetMapping("/item/user/{userId}")
-    Page<Item> getItemBasedOnUserOwner(@PathVariable(value = "userId") Long userId, Pageable pageable) {
-        return itemRepository.findByUserId(userId, pageable);
+    Page<Item> getItemBasedOnUserOwner(@PathVariable(value = "userId") Long userId, Pageable pageable, Principal principal) {
+        Optional<User> currentUser = userRepository.findByUsername(principal.getName());
+        return currentUser.map(user -> {
+            if (user.getId() == userId) return itemRepository.findByUserId(userId, pageable);
+            else return itemRepository.findByUserIdAndIsBought(userId, 0, pageable);
+        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/item")
@@ -83,13 +73,22 @@ public class ItemController {
     Item updateItem(@Valid @RequestBody Item item,Principal principal) {
         Optional<User> userItem = userRepository.findByUsername(principal.getName());
         return userItem.map( user -> {
+            if (item.getUser().getId() != user.getId()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Produk tidak dapat diedit");
             item.setUser(user);
             return itemRepository.save(item);
-        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pengguna tidak ditemukan"));
     }
 
     @DeleteMapping("/item/delete/{id}")
-    ResponseEntity<Item> deleteItem(@PathVariable Long id) {
+    ResponseEntity<Item> deleteItem(@PathVariable Long id, Principal principal) {
+        Optional<User> userItem = userRepository.findByUsername(principal.getName());
+        Optional<Item> itemToDelete = itemRepository.findById(id);
+        userItem.map(user -> {
+            return itemToDelete.map( item -> {
+                if (item.getUser().getId() != user.getId()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Produk tidak dapat dihapus");
+                return item;
+            }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produk tidak ditemukan"));
+        }).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User tidak ditemukan"));
         itemRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }

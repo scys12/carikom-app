@@ -95,6 +95,17 @@ class UserService {
   getItemsFromCategory(id,page){
     return axios.get(`${API_URL}category/item/${id}?page=${page}&size=9`);
   }
+
+  buyItem(item){
+    const req_data = {
+      id : item.id,
+      name : item.name,
+      description : item.description,
+      price : item.price,
+    }
+
+    return axios.post(`${API_URL}buy`, req_data, headers);
+  }
 }
 
 export default new UserService();

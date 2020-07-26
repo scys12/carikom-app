@@ -53,6 +53,14 @@ nav.navbar .navbar-nav a.nav-link:hover, nav .navbar-nav a.dropdown-toggle.nav-l
   
 .jumbotron {
     margin-bottom: 4em;
+    background-color: #2892D7;
+}
+
+.jumbotron > h2, .jumbotron > p{
+    color: white;
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 700;
+    font-size: 40px;
 }
 
 .person-wrapper {
@@ -539,4 +547,28 @@ nav.navbar #navbar-profile .dropdown .dropdown-menu{
     border-radius: 8px 0 8px 0;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px;
     left: 0;
+}
+
+.info-penjual{
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 8px;    
+    border-radius: 0 8px 0 0;
+    background-color: #2892D7;
+}
+.info-penjual a{
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+}
+
+.info-penjual::after{
+    content: '';
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    top: 50%;
 }

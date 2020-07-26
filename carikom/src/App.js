@@ -14,6 +14,7 @@ import AllProducts from './component/AllProducts';
 import ProductsCategory from './component/ProductsCategory';
 import AuthService from './component/AuthService';
 import SearchItemResult from './component/SearchItemResult';
+import NotFound from './component/NotFound';
 
 function preCondition(WrappedComponent) {
     let isLogin = null;
@@ -61,6 +62,7 @@ class App extends Component {
                         <Route exact path="/user/profile" component={preCondition(UserDashboard)}/>
                         <Route exact path="/user/profile/:username" component={preCondition(UserDashboard)}/>
                         <Route exact path="/user/edit" component={preCondition(EditProfile)}/>
+                        <Route component={NotFound}/>
                     </Switch>
                 </>
             </Router>

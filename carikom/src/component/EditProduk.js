@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Form, Button, Container} from 'react-bootstrap'
 import UserService from './UserService';
 import { Redirect } from 'react-router-dom';
+import AuthService from './AuthService';
 
 class EditProduk extends Component {
     constructor(props) {
@@ -35,6 +36,13 @@ class EditProduk extends Component {
 
         UserService.getItemDetail(this.props.match.params.id).then(
             response => {
+                if (AuthService.getCurrentUser().id !== response.data.user.id) {
+                    this.props.history.push({
+                        pathname: '/',
+                        state : 'Produk tidak bisa diedit'
+                    });
+                    window.location.reload()
+                }
                 this.setState({
                     name: response.data.name,
                     deskripsi: response.data.description,

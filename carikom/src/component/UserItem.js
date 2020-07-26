@@ -146,7 +146,7 @@ class UserItem extends Component {
                 )}
                 <Card className="card-home">
                     <Card.Header>
-                        <p className="produk-header">Produk</p>
+                        <p className="produk-header">Produk {this.state.isDifferentId ? 'Orang' : 'Saya'} </p>
                         {this.state.isDifferentId &&
                         <Form inline className="mr-5 ml-auto float-right" method="get" onSubmit={this.handleSearchSubmit.bind(this)} >
                             <FormControl
@@ -167,7 +167,7 @@ class UserItem extends Component {
                         }
                     </Card.Header>
                     <Card.Body>
-                    <Row className="show-grid text-center">
+                        <Row className="show-grid text-center">
                             {itemContent.map(item =>
                                 <div key={item.id} className="item-wrapper">
                                     <Card>
@@ -199,7 +199,10 @@ class UserItem extends Component {
                                     </Card>
                                 </div>
                             )}
-                    </Row>
+                            {(itemContent.length === 0) &&
+                                <div className="no-result">Penjual tidak mempunyai produk yang dijual</div>
+                            }
+                        </Row>
                     </Card.Body>
                 </Card>
                 {totalPages > 1 && (

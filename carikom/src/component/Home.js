@@ -33,18 +33,26 @@ export default class Home extends Component {
     }
 
     render() { 
-        console.log(this.props)
         let categories = this.state.Categories;
         let size = this.state.size;
         categories.map( (category, index) =>        
             category.size = size[index]
         )
         let products = this.state.product;
+        console.log(Math.round(6/3)+1);
+        console.log(Math.round(5/3)+1);
+        console.log(Math.round(4/3)+1);
+        console.log(Math.round(3/3)+1);
+        console.log(Math.round(3/3));
+        console.log(Math.round(2/3));
+        console.log(Math.round(1/3));
         const settings = {
             infinite: true,
             speed: 500,
-            slidesToShow: 3,
-            slidesToScroll: 3
+            slidesToShow: products.length >= 3 ? (Math.round(products.length/3)+1) : (Math.round((products.length+1)/3)),
+            slidesToScroll: products.length >= 3 ? (Math.round(products.length/3)+1) : (Math.round((products.length+1)/3)),
+            autoplay: true,
+            autoplaySpeed: 2000
         };
         return ( 
             <Container>                
@@ -78,9 +86,9 @@ export default class Home extends Component {
                             <div className="show-grid text-center">
                                 <Slider {...settings}>
                                     {products.map(product =>
-                                        <div className="item-wrapper">
-                                            <Card style={{margin:"0 20px"}}>
-                                                <div className="text-center" style={{margin:"20px auto"}}><a href={`/user/profile/${product.user.username}`} className="seller-section"><FontAwesomeIcon icon={faUserTag} size="1px"/> {product.user.username} </a><Card.Img variant="top" src={`http://localhost:3000/images/${product.category.name}.png`} className="item-img" /></div>                                        
+                                        <div className="item-wrapper" key={product.id}>
+                                            <Card style={{margin: (Math.round((products.length+1)/3) == 1 ? '0 250px' : "0 20px") }}>
+                                                <div className="text-center" style={{margin:"20px auto"}}><a href={`/user/profile/${product.user.username}`} className="seller-section"><FontAwesomeIcon icon={faUserTag} size="1x"/> {product.user.username} </a><Card.Img variant="top" src={`http://localhost:3000/images/${product.category.name}.png`} className="item-img" /></div>                                        
                                                 <Card.Body>
                                                     <Card.Title><strong>{product.name}</strong></Card.Title>
                                                     <Card.Subtitle className="mb-2 text-muted">[{product.category.name}]</Card.Subtitle>
@@ -96,6 +104,9 @@ export default class Home extends Component {
                                         </div>
                                     )}
                                 </Slider>
+                                {products.length == 0 &&
+                                    <div className="no-result">Tidak ada produk</div>
+                                }
                             </div>
                             <Button variant="secondary" href="/items" style={{width:'100%'}}>Lihat Semua Produk</Button>
                         </Card.Body>
