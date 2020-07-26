@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, ButtonGroup, ToggleButton, Card, Button, Row} from 'react-bootstrap';
 import UserService from './UserService';
-import {faUser, faUserTag} from '@fortawesome/free-solid-svg-icons';
+import {faUser, faUserTag, faTags} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Pagination from "react-js-pagination";
 import AuthService from './AuthService';
@@ -105,7 +105,7 @@ class SearchResult extends Component {
                                 checked={this.state.radioValue === radio.value}
                                 onChange={(e) => this.setRadioValue(e.currentTarget.value)}
                             >
-                                <FontAwesomeIcon icon={faUser} size="lg"/>
+                                <FontAwesomeIcon icon={idx == 0 ? faTags : faUser} size="lg"/>
                                 <span>{radio.name}</span>
                             </ToggleButton>
                         ))}
@@ -134,7 +134,9 @@ class SearchResult extends Component {
                     {(this.state.searchResult && this.state.type ==="user") && this.state.searchResult.map(user =>
                         <div key={user.id} className="item-wrapper">
                             <Card>
-                                <div className="text-center"><Card.Img variant="top" src={`http://localhost:3000/images/motherboard.png`} className="item-img" /></div>
+                                <div className="text-center mt-5">
+                                    <FontAwesomeIcon icon={faUser} size="5x" color="#3498db"/>
+                                </div>
                                 <Card.Body>
                                     <Card.Title><strong>{user.nama}</strong></Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">[{user.lokasi}]</Card.Subtitle>
@@ -144,7 +146,7 @@ class SearchResult extends Component {
                                     </Card.Text>
                                     <hr/>
                                     <Button href={`/user/${user.id}/item`} className="produk-button" variant="primary">Lihat Produk Penjual</Button>
-                                    <Button href={`/user/profile/${user.id}`} className="produk-button" variant="secondary">Lihat Profil</Button>
+                                    <Button href={`/user/profile/${user.username}`} className="produk-button" variant="secondary">Lihat Profil</Button>
                                 </Card.Body>
                             </Card>
                         </div>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9127250f-7093-4661-9685-8129818fe3ae" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/public/images/brand.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/public/images/homepage.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/public/images/motherboard.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/public/images/processor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/public/images/ram.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/public/images/storage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/public/images/text.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/public/images/vga.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/AllProducts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/AppNav.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/Auth.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/AuthService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/EditProduk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/EditProfile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/Home.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/ItemDetail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/Login.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/NotFound.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/ProductsCategory.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/Register.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/SearchItemResult.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/SearchResult.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/TambahProduk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/UserDashboard.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/UserItem.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/UserService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/authHeader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/custom.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/component/notfound.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/serviceWorker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/carikom/src/setupTests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/CarikomApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/controller/AuthController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/controller/CategoryController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/controller/ItemController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/controller/SearchController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/controller/TransactionController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/model/Category.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/model/ERole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/model/Item.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/model/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/model/Transaction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/model/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/payload/request/LoginRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/payload/request/SignupRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/payload/response/JwtResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/payload/response/MessageResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/repository/CategoryRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/repository/ItemRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/repository/RoleRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/repository/TransactionRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/repository/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/security/configuration/WebSecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/security/jwt/AuthEntryPointJwt.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/security/jwt/AuthTokenFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/security/jwt/JwtUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/security/service/UserDetailsImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/its/samuel/carikom/security/service/UserDetailsServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Data.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/its/samuel/carikom/CarikomApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1eoJH37JwhlylkmVhkYAoL4lxHE" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JAVA" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/backend" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.its.samuel.carikom" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="CarikomApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="carikom" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.its.samuel.carikom.CarikomApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9127250f-7093-4661-9685-8129818fe3ae" name="Default Changelist" comment="" />
+      <created>1594981920394</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1594981920394</updated>
+      <workItem from="1594981932929" duration="11593000" />
+      <workItem from="1594994073939" duration="515000" />
+      <workItem from="1594994602585" duration="1971000" />
+      <workItem from="1595085322201" duration="1516000" />
+      <workItem from="1595092883510" duration="16036000" />
+      <workItem from="1595110775572" duration="4230000" />
+      <workItem from="1595115373771" duration="3128000" />
+      <workItem from="1595140835223" duration="1590000" />
+      <workItem from="1595144011073" duration="292000" />
+      <workItem from="1595144434153" duration="1356000" />
+      <workItem from="1595151119056" duration="171000" />
+      <workItem from="1595151566311" duration="9661000" />
+      <workItem from="1595174536242" duration="10748000" />
+      <workItem from="1595356079018" duration="609000" />
+      <workItem from="1595417698930" duration="29453000" />
+      <workItem from="1595566557545" duration="34720000" />
+      <workItem from="1595683611796" duration="33490000" />
+      <workItem from="1595784892625" duration="10893000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="this" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>

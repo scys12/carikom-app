@@ -180,19 +180,19 @@ class UserItem extends Component {
                                                 <strong>Rp{item.price}</strong>
                                             </Card.Text>
                                             <hr/>
-                                            {(item.isBought === 0) &&
+                                            {item.user.id == AuthService.getCurrentUser().id &&
                                                 <>
-                                                    <Button href={`/user/item/${item.id}`} className="produk-button" variant="primary">Lihat Produk</Button>
-                                                    {item.user.id == AuthService.getCurrentUser().id &&
+                                                    {(item.isBought === 0) &&
                                                         <>
+                                                            <Button href={`/user/item/${item.id}`} className="produk-button" variant="primary">Lihat Produk</Button>
                                                             <Button href={`/user/item/edit/${item.id}`} className="produk-button" variant="warning">Edit Produk</Button>
-                                                            <Button onClick={this.showDeleteAlert.bind(this)} className="produk-button" variant="danger">Hapus Produk</Button>
-                                                            <SweetAlert  show={this.state.showAlert} warning showCancel confirmBtnText="Ya, Hapus!" confirmBtnBsStyle="danger" title="Apa kamu yakin menghapus produk ini?" onConfirm={() => this.deleteItem(item.id)}
-                                                                onCancel={this.onCancel.bind(this)} focusCancelBtn cancelBtnText="Tidak">
-                                                                Kamu harus menambahkan ulang produk ini jika ingin menjualnya lagi !
-                                                            </SweetAlert>
                                                         </>
                                                     }
+                                                    <Button onClick={this.showDeleteAlert.bind(this)} className="produk-button" variant="danger">Hapus Produk</Button>
+                                                    <SweetAlert  show={this.state.showAlert} warning showCancel confirmBtnText="Ya, Hapus!" confirmBtnBsStyle="danger" title="Apa kamu yakin menghapus produk ini?" onConfirm={() => this.deleteItem(item.id)}
+                                                        onCancel={this.onCancel.bind(this)} focusCancelBtn cancelBtnText="Tidak">
+                                                        Kamu harus menambahkan ulang produk ini jika ingin menjualnya lagi !
+                                                    </SweetAlert>
                                                 </>
                                             }
                                         </Card.Body>

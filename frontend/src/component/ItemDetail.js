@@ -63,6 +63,19 @@ class ItemDetail extends Component {
             response =>{
                 console.log(response.data)
                 this.setState({showAlert : true, success : true, isError : false, transaction : response.data})
+                setTimeout(() => {
+                    this.setState({
+                        showAlert:false,
+                    })
+                    this.props.history.push({
+                        pathname: "/",
+                        state: {
+                            message: "",
+                            type: ""
+                        }
+                    });
+                    window.location.reload()
+                }, 5000);
             },
             error => {
                 console.log(error.response.message)
@@ -73,20 +86,7 @@ class ItemDetail extends Component {
 
     render() { 
         const {isLoading,content} = this.state;
-        const buyDate = dateFormat(this.state.transaction.buyDate, "d mmmm yyyy");
-        setTimeout(() => {
-            this.setState({
-                showAlert:false,
-            })
-            this.props.history.push({
-                pathname: "/",
-                state: {
-                    message: "",
-                    type: ""
-                }
-            });
-            window.location.reload()
-        }, 5000);
+        const buyDate = dateFormat(this.state.transaction.buyDate, "d mmmm yyyy");        
         if (isLoading) {
             return(<div>Loading...</div>)
         }

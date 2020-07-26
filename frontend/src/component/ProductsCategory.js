@@ -97,7 +97,7 @@ class ProductsCategory extends Component {
                                             </Card.Text>
                                             <hr/>
                                             <Button href={`/user/item/${user.id}`} className="produk-button" variant="primary">Lihat Produk Penjual</Button>
-                                            <Button href={`/user/item/${user.id}`} className="produk-button" variant="secondary">Lihat Profil</Button>
+                                            <Button href={`/user/item/${user.username}`} className="produk-button" variant="secondary">Lihat Profil</Button>
                                         </Card.Body>
                                     </Card>
                                 </div>
