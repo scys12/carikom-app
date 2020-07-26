@@ -7,19 +7,33 @@ class ItemDetail extends Component {
     state = { 
         isLoading : true,
         content : null,
-        user : AuthService.getCurrentUser()
+        user : AuthService.getCurrentUser(),
+        isError : false
     }
 
     componentDidMount(){
         UserService.getItemDetail(this.props.match.params.id).then(
-            response => {
+            response => {                
+                if (response.data.isBought == 1) {
+                    this.props.history.push({
+                        pathname: this.props.history.goBack(),
+                        state: {
+                            message: "Produk sudah terjual",
+                            type: "danger"
+                        }
+                    });
+                    window.location.reload();
+                    
+                }
                 this.setState({
                     content : response.data,
                     isLoading : false
                 })
             },
             error => {
-                console.log(error);
+                if (error.response.status == 404) {
+                    this.setState({isError : true})
+                }
             }
         )
     }
@@ -29,27 +43,28 @@ class ItemDetail extends Component {
         if (isLoading) {
             return(<div>Loading...</div>)
         }
-        return (
-            <Container>
-                <Card>
-                    <Card.Body className="d-flex">
-                        <Card.Img className="user-item" variant="top" src={`http://localhost:3000/images/${content.category.name}.png`} />
-                        <div className="user-item-text">
-                            <Card.Text className="user-item-title">
-                                {content.name}
-                            </Card.Text>
-                            <Card.Text className="user-item-category">
-                                {content.category.name}
-                            </Card.Text>
-                            <hr></hr>
-                            <Card.Text className="user-item-price">
-                                <span className="price-text">Harga</span><span className="price-total">Rp {content.price}</span>
-                            </Card.Text>
-                            {(this.state.user.username !== content.user.username) && 
-                                <div className="button-beli"><Button variant="primary">Beli Sekarang</Button></div>
-                            }
-                        </div>                        
-                    </Card.Body>
+        else
+            return (
+                <Container>
+                    <Card>
+                        <Card.Body className="d-flex">
+                            <Card.Img className="user-item" variant="top" src={`http://localhost:3000/images/${content.category.name}.png`} />
+                            <div className="user-item-text">
+                                <Card.Text className="user-item-title">
+                                    {content.name}
+                                </Card.Text>
+                                <Card.Text className="user-item-category">
+                                    {content.category.name}
+                                </Card.Text>
+                                <hr></hr>
+                                <Card.Text className="user-item-price">
+                                    <span className="price-text">Harga</span><span className="price-total">Rp {content.price}</span>
+                                </Card.Text>
+                                {(this.state.user.username !== content.user.username) && 
+                                    <div className="button-beli"><Button variant="primary">Beli Sekarang</Button></div>
+                                }
+                            </div>                        
+                        </Card.Body>
                         <div className="user-item-description">
                             <Card.Text className="description-title">
                                 Deskripsi
@@ -59,9 +74,9 @@ class ItemDetail extends Component {
                                 {content.description}
                             </Card.Text>
                         </div>
-                </Card>
-            </Container>
-        );
+                    </Card>
+                </Container>
+            );
     }    
 }
  

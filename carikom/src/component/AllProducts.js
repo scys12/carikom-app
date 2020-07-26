@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import UserService from './UserService';
 import { Container, Card, Row, Button } from 'react-bootstrap';
 import Pagination from 'react-js-pagination';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserTag } from '@fortawesome/free-solid-svg-icons';
 
 class AllProducts extends Component {
     state = { 
@@ -53,16 +55,17 @@ class AllProducts extends Component {
                             {this.state.products  && this.state.products.map(item =>
                                 <div key={item.id} className="item-wrapper">
                                     <Card>
-                                        <div className="text-center"><Card.Img variant="top" src={`http://localhost:3000/images/${item.category.name}.png`} className="item-img" /></div>
+                                        <div className="text-center"><a href={`/user/profile/${item.user.username}`} className="seller-section"><FontAwesomeIcon icon={faUserTag} size="1px"/> {item.user.username} </a><Card.Img variant="top" src={`http://localhost:3000/images/${item.category.name}.png`} className="item-img" /></div>
                                         <Card.Body>
                                             <Card.Title><strong>{item.name}</strong></Card.Title>
                                             <Card.Subtitle className="mb-2 text-muted">[{item.category.name}]</Card.Subtitle>
                                             <hr/>
-                                            <Card.Text>
-                                                {item.description}
+                                            <Card.Text style={{fontSize: "17px"}}>
+                                                <strong>Rp{item.price}</strong>
                                             </Card.Text>
                                             <hr/>
                                             <Button href={`/user/item/${item.id}`} className="produk-button" variant="primary">Lihat Produk</Button>
+                                            <Button href={`/user/${item.user.id}/item`} className="produk-button" variant="secondary">Lihat Produk Penjual</Button>
                                         </Card.Body>
                                     </Card>
                                 </div>

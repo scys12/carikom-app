@@ -3,16 +3,29 @@ import AuthService from './AuthService'
 import { Container, Card, Button, Alert} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faUser} from '@fortawesome/free-solid-svg-icons';
+import UserService from './UserService';
 
 export default class UserDashboard extends Component {
     state = { 
-        currentUser: AuthService.getCurrentUser(),
+        currentUser: '',
         showAlertNotification : true,
         message: ''
      }
 
     componentDidMount(){
-        console.log(this.props);
+        const username = this.props.match.params.username;
+        if (username) {
+            UserService.getUserProfile(username).then(
+                response => {
+                    this.setState({currentUser : response.data});
+                },
+                error =>{
+                    console.log(error);
+                }
+            )
+        }else{
+            this.setState({currentUser : AuthService.getCurrentUser()});            
+        }
         if (typeof this.props.location.state != "undefined") {
             this.setState({message:this.props.location.state.message, type:this.props.location.state.type})
             setTimeout(() => {
@@ -32,7 +45,6 @@ export default class UserDashboard extends Component {
     }
     render() {
         const {currentUser} = this.state;
-        
         return ( 
             <Container>
                 {(this.state.message && this.state.showAlertNotification) &&( 
@@ -43,7 +55,7 @@ export default class UserDashboard extends Component {
                 <Card>
                     <Card.Header>
                         <p className="produk-header">Profile</p>
-                        <Button variant="warning" style={{float: "right", color: "white"}} href="/user/edit">Edit Profile</Button>
+                        {AuthService.getCurrentUser().id == currentUser.id && <Button variant="warning" style={{float: "right", color: "white"}} href="/user/edit">Edit Profile</Button>}
                     </Card.Header>
                     <div className="text-center mt-5">
                         <FontAwesomeIcon icon={faUser} size="10x" color="#3498db"/>

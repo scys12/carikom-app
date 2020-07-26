@@ -16,6 +16,8 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     Optional<Item> findByName(String name);
     Page<Item> findByCategoryId(Long categoryId, Pageable pageable);
     Long countByCategoryId(Long categoryId);
+    Page<Item> findByUserIdAndNameContainingAndIsBought(Long userId, String name, Integer isBought, Pageable pageable);
+    Page<Item> findByUserIdAndNameContainingAndIsBoughtAndCategoryId(Long userId, String name, Integer isBought, Long categoryId, Pageable pageable);
     @Query(value = "select * from items where is_bought = 0 order by id desc limit 6", nativeQuery = true)
     List<Item> findByIsBoughtOrderByIdDesc();
 }

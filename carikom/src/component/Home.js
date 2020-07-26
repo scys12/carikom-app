@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Jumbotron, Container, Card, Row, Image, Button} from 'react-bootstrap';
 import UserService from './UserService';
 import Slider from 'react-slick'
+import { faUserTag } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default class Home extends Component {
     state = {
         Categories : [],
@@ -78,16 +80,17 @@ export default class Home extends Component {
                                     {products.map(product =>
                                         <div className="item-wrapper">
                                             <Card style={{margin:"0 20px"}}>
-                                                <div className="text-center" style={{margin:"20px auto"}}><Card.Img variant="top" src={`http://localhost:3000/images/${product.category.name}.png`} className="item-img" /></div>                                        
+                                                <div className="text-center" style={{margin:"20px auto"}}><a href={`/user/profile/${product.user.username}`} className="seller-section"><FontAwesomeIcon icon={faUserTag} size="1px"/> {product.user.username} </a><Card.Img variant="top" src={`http://localhost:3000/images/${product.category.name}.png`} className="item-img" /></div>                                        
                                                 <Card.Body>
                                                     <Card.Title><strong>{product.name}</strong></Card.Title>
                                                     <Card.Subtitle className="mb-2 text-muted">[{product.category.name}]</Card.Subtitle>
                                                     <hr/>
-                                                    <Card.Text>
-                                                        {product.description}
+                                                    <Card.Text style={{fontSize: "17px"}}>
+                                                        <strong>Rp{product.price}</strong>
                                                     </Card.Text>
                                                     <hr/>
                                                     <Button href={`/user/item/${product.id}`} className="produk-button" variant="primary">Lihat Produk</Button>
+                                                    <Button href={`/user/${product.user.id}/item`} className="produk-button" variant="secondary">Lihat Produk Penjual</Button>
                                                 </Card.Body>
                                             </Card>
                                         </div>

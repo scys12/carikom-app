@@ -136,6 +136,7 @@ h3 {
 }
 
 .item-img{
+    margin-top: 15px;
     width: 200px;
     height: 200px;
 }
@@ -525,4 +526,17 @@ nav.navbar #navbar-profile .dropdown .dropdown-menu{
     font-size: 39px;
     z-index: 5;
     text-align: center;
+}
+
+.seller-section{
+    position: absolute;
+    font-size: 17px;
+    padding: 7px;
+    font-weight: 600;
+    background: #2892D7;
+    color: white !important;
+    top: 0;
+    border-radius: 8px 0 8px 0;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px;
+    left: 0;
 }

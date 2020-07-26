@@ -11,9 +11,9 @@ import ItemDetail from './component/ItemDetail';
 import EditProfile from './component/EditProfile';
 import SearchResult from './component/SearchResult';
 import AllProducts from './component/AllProducts';
-import AuthRequiredRoute from './AuthRequiredRoute';
 import ProductsCategory from './component/ProductsCategory';
 import AuthService from './component/AuthService';
+import SearchItemResult from './component/SearchItemResult';
 
 function preCondition(WrappedComponent) {
     let isLogin = null;
@@ -53,10 +53,13 @@ class App extends Component {
                         <Route exact path="/category/item/:id" component={ProductsCategory}/>
                         <Route exact path="/auth" component={Auth}/>
                         <Route exact path="/user/item" component={preCondition(UserItem)}/>
+                        <Route exact path="/user/:id/item/" component={preCondition(UserItem)}/>
+                        <Route exact path="/user/:id/search/" component={preCondition(SearchItemResult)}/>
                         <Route exact path="/user/item/tambah" component={preCondition(TambahProduk)}/>
                         <Route exact path="/user/item/edit/:id" component={preCondition(EditProduk)}/>
                         <Route exact path="/user/item/:id" component={preCondition(ItemDetail)}/>
                         <Route exact path="/user/profile" component={preCondition(UserDashboard)}/>
+                        <Route exact path="/user/profile/:username" component={preCondition(UserDashboard)}/>
                         <Route exact path="/user/edit" component={preCondition(EditProfile)}/>
                     </Switch>
                 </>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Card, Row, Button, Alert} from 'react-bootstrap';
+import { Container, Form, Card, Row, Button, Alert, FormControl} from 'react-bootstrap';
 import UserService from './UserService';
 import AuthService from './AuthService';
 import Pagination from "react-js-pagination";
@@ -13,15 +13,14 @@ class UserItem extends Component {
             Items : [],
             message: '',
             type: '',
-            visible: false,
-            user: AuthService.getCurrentUser(),
-            articlesDetails: [],
+            isDifferentId : true,
             activePage:1,
             totalPages: null,
             itemsCountPerPage:null,
             totalItemsCount:null,
             showAlert: false,
             success : false,
+            searchText : '',
             showAlertNotification : true
         };
     }
@@ -40,7 +39,12 @@ class UserItem extends Component {
     }
     
     fetchUrl(page){
-        UserService.getUserItems(this.state.user.id, (page-1)).then(
+        let id = this.props.match.params.id
+        if (!id) {
+            id = AuthService.getCurrentUser().id
+            this.setState({isDifferentId : false})
+        }
+        UserService.getUserItems(id, (page-1)).then(
             response =>{
                 this.setState({
                     totalPages : response.data.totalPages,
@@ -103,6 +107,24 @@ class UserItem extends Component {
             showAlert: false
         });
     }
+
+    handleSearchInput(e){
+        const attVal = e.target.value;
+        this.setState({searchText : attVal});
+    }
+
+    handleSearchSubmit(e){
+        e.preventDefault()
+        let id = null;
+        if (this.state.isDifferentId) {
+            id = this.props.match.params.id;
+        }else id = AuthService.getCurrentUser().id
+        this.props.history.push({
+            pathname: `/user/${id}/search`,
+            search: `?type=0&searchWord=${this.state.searchText}`
+        });
+        window.location.reload()
+    }
       
     render() { 
         const isLoading = this.state.isLoading;
@@ -114,10 +136,10 @@ class UserItem extends Component {
                 Loading...
                 </div>
             );
-        }        console.log(itemContent)
+        }
         return (
             <Container>
-                {(this.state.message && this.state.showAlertNotification) &&( 
+                {(this.state.message && this.state.showAlertNotification) &&(
                     <Alert key="1" variant={this.state.type}>
                         {this.state.message}
                     </Alert>
@@ -125,7 +147,24 @@ class UserItem extends Component {
                 <Card className="card-home">
                     <Card.Header>
                         <p className="produk-header">Produk</p>
-                        <Button variant="success" style={{float: "right"}} href="/user/item/tambah">Tambah Produk</Button>
+                        {this.state.isDifferentId &&
+                        <Form inline className="mr-5 ml-auto float-right" method="get" onSubmit={this.handleSearchSubmit.bind(this)} >
+                            <FormControl
+                                onChange={this.handleSearchInput.bind(this)}
+                                type="text"
+                                placeholder="Cari Produk Penjual"
+                                className="mr-sm-2"
+                                style={{width:'350px'}}
+                                required={true}
+                            />
+                            <Button type="submit" variant="outline-primary">
+                                Search
+                            </Button>                        
+                        </Form>
+                        }
+                        {!this.state.isDifferentId && 
+                            <Button variant="success" style={{float: "right"}} href="/user/item/tambah">Tambah Produk</Button>
+                        }
                     </Card.Header>
                     <Card.Body>
                     <Row className="show-grid text-center">
@@ -137,19 +176,23 @@ class UserItem extends Component {
                                             <Card.Title><strong>{item.name}</strong></Card.Title>
                                             <Card.Subtitle className="mb-2 text-muted">[{item.category.name}]</Card.Subtitle>
                                             <hr/>
-                                            <Card.Text>
-                                                {item.description}
+                                            <Card.Text style={{fontSize: "17px"}}>
+                                                <strong>Rp{item.price}</strong>
                                             </Card.Text>
                                             <hr/>
                                             {(item.isBought === 0) &&
                                                 <>
                                                     <Button href={`/user/item/${item.id}`} className="produk-button" variant="primary">Lihat Produk</Button>
-                                                    <Button href={`/user/item/edit/${item.id}`} className="produk-button" variant="warning">Edit Produk</Button>
-                                                    <Button onClick={this.showDeleteAlert.bind(this)} className="produk-button" variant="danger">Hapus Produk</Button>
-                                                    <SweetAlert  show={this.state.showAlert} warning showCancel confirmBtnText="Ya, Hapus!" confirmBtnBsStyle="danger" title="Apa kamu yakin menghapus produk ini?" onConfirm={() => this.deleteItem(item.id)}
-                                                        onCancel={this.onCancel.bind(this)} focusCancelBtn cancelBtnText="Tidak">
-                                                        Kamu harus menambahkan ulang produk ini jika ingin menjualnya lagi !
-                                                    </SweetAlert>
+                                                    {item.user.id == AuthService.getCurrentUser().id &&
+                                                        <>
+                                                            <Button href={`/user/item/edit/${item.id}`} className="produk-button" variant="warning">Edit Produk</Button>
+                                                            <Button onClick={this.showDeleteAlert.bind(this)} className="produk-button" variant="danger">Hapus Produk</Button>
+                                                            <SweetAlert  show={this.state.showAlert} warning showCancel confirmBtnText="Ya, Hapus!" confirmBtnBsStyle="danger" title="Apa kamu yakin menghapus produk ini?" onConfirm={() => this.deleteItem(item.id)}
+                                                                onCancel={this.onCancel.bind(this)} focusCancelBtn cancelBtnText="Tidak">
+                                                                Kamu harus menambahkan ulang produk ini jika ingin menjualnya lagi !
+                                                            </SweetAlert>
+                                                        </>
+                                                    }
                                                 </>
                                             }
                                         </Card.Body>

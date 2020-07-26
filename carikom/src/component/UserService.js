@@ -36,8 +36,14 @@ class UserService {
   }
 
   search(searchInput, type, page){
-    console.log(page)
     return axios.get(`${API_URL}search?type=${type}&searchWord=${searchInput}&page=${page}&size=9`);
+  }
+  searchUserItems(id,searchInput, type, page){
+    return axios.get(`${API_URL}user/${id}/search?type=${type}&searchWord=${searchInput}&page=${page}&size=9`, headers);
+  }
+
+  getUserProfile(username){
+    return axios.get(`${API_URL}user/${username}`,headers)
   }
 
   editProfile(username, email, nama, lokasi, telepon, password){

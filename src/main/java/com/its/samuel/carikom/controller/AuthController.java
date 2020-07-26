@@ -132,4 +132,9 @@ public class AuthController {
                 item -> item.getAuthority()).collect(Collectors.toList());
         return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), userDetails.getLokasi(), userDetails.getNama(), userDetails.getTelepon(), roles));
     }
+
+    @GetMapping("user/{username}")
+    ResponseEntity<User> getUserProfile(@PathVariable String username){
+        return userRepository.findByUsername(username).map(response -> ResponseEntity.ok().body(response)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 }

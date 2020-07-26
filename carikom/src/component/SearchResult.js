@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, ButtonGroup, ToggleButton, Card, Button, Row} from 'react-bootstrap';
 import UserService from './UserService';
-import {faUser} from '@fortawesome/free-solid-svg-icons';
+import {faUser, faUserTag} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Pagination from "react-js-pagination";
 import AuthService from './AuthService';
@@ -35,7 +35,7 @@ class SearchResult extends Component {
         const searchURL = window.location.search
         const params = new URLSearchParams(searchURL);
         this.setState({ 
-            radioValue : (params.get('type') === "product") ? "product" : "user",
+            radioValue : params.get('type'),
             searchWord : params.get('searchWord')
         });
         UserService.search(params.get('searchWord'), params.get('type'), this.state.activePage-1).then(
@@ -116,16 +116,17 @@ class SearchResult extends Component {
                     {(this.state.searchResult && this.state.type ==="product") && this.state.searchResult.map(item =>
                         <div key={item.id} className="item-wrapper">
                             <Card>
-                                <div className="text-center"><Card.Img variant="top" src={`http://localhost:3000/images/${item.category.name}.png`} className="item-img" /></div>
+                                <div className="text-center"><a href={`/user/profile/${item.user.username}`} className="seller-section"><FontAwesomeIcon icon={faUserTag} size="1px"/> {item.user.username} </a><Card.Img variant="top" src={`http://localhost:3000/images/${item.category.name}.png`} className="item-img" /></div>
                                 <Card.Body>
                                     <Card.Title><strong>{item.name}</strong></Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">[{item.category.name}]</Card.Subtitle>
                                     <hr/>
-                                    <Card.Text>
-                                        {item.description}
+                                    <Card.Text style={{fontSize: "17px"}}>
+                                        <strong>Rp{item.price}</strong>
                                     </Card.Text>
                                     <hr/>
                                     <Button href={`/user/item/${item.id}`} className="produk-button" variant="primary">Lihat Produk</Button>
+                                    <Button href={`/user/${item.user.id}/item`} className="produk-button" variant="secondary">Lihat Produk Penjual</Button>
                                 </Card.Body>
                             </Card>
                         </div>
@@ -143,7 +144,7 @@ class SearchResult extends Component {
                                     </Card.Text>
                                     <hr/>
                                     <Button href={`/user/item/${user.id}`} className="produk-button" variant="primary">Lihat Produk Penjual</Button>
-                                    <Button href={`/user/item/${user.id}`} className="produk-button" variant="secondary">Lihat Profil</Button>
+                                    <Button href={`/user/profile/${user.id}`} className="produk-button" variant="secondary">Lihat Profil</Button>
                                 </Card.Body>
                             </Card>
                         </div>

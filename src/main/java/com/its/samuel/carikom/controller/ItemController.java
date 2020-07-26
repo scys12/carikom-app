@@ -99,4 +99,13 @@ public class ItemController {
         List<Item> items = itemRepository.findByIsBoughtOrderByIdDesc();
         return items;
     }
+
+    @GetMapping("/user/{id}/search")
+    Page<Item> searchUserItem(@PathVariable Long id, @RequestParam Long type, @RequestParam String searchWord, Pageable pageable){
+        if (type == 0){
+            return itemRepository.findByUserIdAndNameContainingAndIsBought(id, searchWord, 0, pageable);
+        }else if(type > 0 && type < 6){
+            return itemRepository.findByUserIdAndNameContainingAndIsBoughtAndCategoryId(id, searchWord, 0, type, pageable);
+        }else throw new  ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
 }

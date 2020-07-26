@@ -15,10 +15,7 @@ class AppNav extends Component {
             searchText: "",
             searchResult: [],
             isRedirect : false,
-            fixText : ''
         };
-        console.log(this.state.currentUser)
-        console.log(AuthService.isAuthenticated())
     }
 
     async componentDidMount(){
