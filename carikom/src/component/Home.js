@@ -63,7 +63,7 @@ export default class Home extends Component {
                                         </a>
                                         <div className="category-div">
                                             <p>{category.size} produk</p>
-                                            <a className="category-title" href={`/category/${category.id}`}>{category.name}</a>
+                                            <a className="category-title" href={`/category/item/${category.id}`}>{category.name}</a>
                                         </div>
                                     </div>
                                 )}                                
@@ -80,18 +80,21 @@ export default class Home extends Component {
                                             <Card style={{margin:"0 20px"}}>
                                                 <div className="text-center" style={{margin:"20px auto"}}><Card.Img variant="top" src={`http://localhost:3000/images/${product.category.name}.png`} className="item-img" /></div>                                        
                                                 <Card.Body>
-                                                    <Card.Title>{product.name}</Card.Title>
-                                                        <Card.Text>
-                                                            {product.description}
-                                                        </Card.Text>
-                                                    <Button variant="primary">Lihat Selengkapnya</Button>
+                                                    <Card.Title><strong>{product.name}</strong></Card.Title>
+                                                    <Card.Subtitle className="mb-2 text-muted">[{product.category.name}]</Card.Subtitle>
+                                                    <hr/>
+                                                    <Card.Text>
+                                                        {product.description}
+                                                    </Card.Text>
+                                                    <hr/>
+                                                    <Button href={`/user/item/${product.id}`} className="produk-button" variant="primary">Lihat Produk</Button>
                                                 </Card.Body>
                                             </Card>
                                         </div>
                                     )}
                                 </Slider>
                             </div>
-                            <Button variant="secondary" style={{width:'100%'}}>Lihat Semua Produk</Button>
+                            <Button variant="secondary" href="/items" style={{width:'100%'}}>Lihat Semua Produk</Button>
                         </Card.Body>
                     </Card>
                 </div>

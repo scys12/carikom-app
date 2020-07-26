@@ -12,7 +12,7 @@ class AuthRequiredRoute extends Route{
                 }
             }}/>
         }else{
-          return <this.props.component />
+          return <this.props />
         }
     }
 }

@@ -98,7 +98,6 @@ class Login extends Component {
                     showAlertNotification : false
                 })
                 this.props.history.push({
-                    pathname: "/auth",
                     state: {
                         message: "",
                         type: ""

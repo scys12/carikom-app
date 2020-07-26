@@ -36,7 +36,7 @@ class AuthService{
     }
     
     isAuthenticated(){
-        return JSON.parse(localStorage.getItem("user")) === "undefined";
+        return localStorage.getItem("user") != null;
     }
 }
 

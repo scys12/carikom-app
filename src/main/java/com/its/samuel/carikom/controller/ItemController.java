@@ -46,6 +46,11 @@ public class ItemController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/category/item/{categoryId}")
+    Page<Item> getItemsBasedOnCategory(@PathVariable Long categoryId, Pageable pageable) {
+        return itemRepository.findByCategoryId(categoryId, pageable);
+    }
+
 //    @GetMapping("/carikom/item/{userOwner}/{name}")
 //    ResponseEntity<?> getItemBasedOnItemName(@PathVariable Long userOwner, @PathVariable String name) {
 //        Optional<Item> item = itemRepository.findByName(name);

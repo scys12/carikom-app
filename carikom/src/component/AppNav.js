@@ -17,6 +17,8 @@ class AppNav extends Component {
             isRedirect : false,
             fixText : ''
         };
+        console.log(this.state.currentUser)
+        console.log(AuthService.isAuthenticated())
     }
 
     async componentDidMount(){
@@ -79,7 +81,7 @@ class AppNav extends Component {
                     <NavDropdown title="Kategori" id="collasible-nav-dropdown" alt="logo">
                         {
                             Categories.map( category =>
-                                <NavDropdown.Item key={category.id} href={'/category/'+ category.id}>{category.name}</NavDropdown.Item>
+                                <NavDropdown.Item key={category.id} href={'/category/item/'+ category.id}>{category.name}</NavDropdown.Item>
                             )
                         }
                     </NavDropdown>

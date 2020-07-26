@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import UserService from './UserService';
+import AuthService from './AuthService';
 import { Container, Card, Row, Button } from 'react-bootstrap';
 import Pagination from 'react-js-pagination';
 
-class AllProducts extends Component {
+class ProductsCategory extends Component {
     state = { 
-        products : [],
-        totalPages: null,
         activePage:1,
+        user: AuthService.getCurrentUser(),
+        totalPages: null,
         itemsCountPerPage:null,
         totalItemsCount:null,
-        isLoading : true
+        items : []
     }
 
-    componentDidMount(){        
+    componentDidMount(){
         this.fetchUrl(this.state.activePage);
     }
 
@@ -25,14 +26,14 @@ class AllProducts extends Component {
     }
 
     fetchUrl(page){
-        UserService.getAllItems(page-1).then(
+        UserService.getItemsFromCategory(this.props.match.params.id, (page-1)).then(
             response =>{
                 this.setState({
                     totalPages : response.data.totalPages,
                     itemsCountPerPage : response.data.size,
                     totalItemsCount : response.data.totalElements,
-                    isLoading : false,
-                    products : response.data.content
+                    numberOfElements : response.data.numberOfElements,
+                    items : response.data.content
                 });
             },
             error =>{
@@ -42,15 +43,29 @@ class AllProducts extends Component {
     }
 
     render() { 
-        return (
+        const categories = [
+            { id: '1', value: "RAM" },
+            { id: '2', value: "Processor" },
+            { id: '3', value: "VGA" },
+            { id: '4', value: "Motherboard" },
+            { id: '5', value: "Storage" },
+        ];
+        let valueHeader = null
+        categories.map( category =>{
+            if(category.id == this.props.match.params.id){
+                valueHeader = category.value
+            }
+        });
+        console.log(valueHeader)
+        return ( 
             <Container>
                 <Card className="card-home">
                     <Card.Header>
-                        <p className="produk-header">Semua Produk</p>
+                        <p className="produk-header">Produk Untuk Kategori {valueHeader}</p>
                     </Card.Header>
                     <Card.Body>
                         <Row className="show-grid text-center">
-                            {this.state.products  && this.state.products.map(item =>
+                            {this.state.items.length > 0  && this.state.items.map(item =>
                                 <div key={item.id} className="item-wrapper">
                                     <Card>
                                         <div className="text-center"><Card.Img variant="top" src={`http://localhost:3000/images/${item.category.name}.png`} className="item-img" /></div>
@@ -67,8 +82,26 @@ class AllProducts extends Component {
                                     </Card>
                                 </div>
                             )}
-                            {(this.state.products.length === 0) &&
-                                <div className="no-result">Tidak ada produk</div>
+                            {(this.state.items && this.state.type ==="user") && this.state.items.map(user =>
+                                <div key={user.id} className="item-wrapper">
+                                    <Card>
+                                        <div className="text-center"><Card.Img variant="top" src={`http://localhost:3000/images/motherboard.png`} className="item-img" /></div>
+                                        <Card.Body>
+                                            <Card.Title><strong>{user.nama}</strong></Card.Title>
+                                            <Card.Subtitle className="mb-2 text-muted">[{user.lokasi}]</Card.Subtitle>
+                                            <hr/>
+                                            <Card.Text>
+                                                {user.username}
+                                            </Card.Text>
+                                            <hr/>
+                                            <Button href={`/user/item/${user.id}`} className="produk-button" variant="primary">Lihat Produk Penjual</Button>
+                                            <Button href={`/user/item/${user.id}`} className="produk-button" variant="secondary">Lihat Profil</Button>
+                                        </Card.Body>
+                                    </Card>
+                                </div>
+                            )}
+                            {(this.state.items.length === 0) &&
+                                <div className="no-result">Tidak ada produk yang sesuai dengan kategori</div>
                             }
                         </Row>
                     </Card.Body>
@@ -88,8 +121,8 @@ class AllProducts extends Component {
                     )}
                 </Card>
             </Container>
-        );
+         );
     }
 }
  
-export default AllProducts;
+export default ProductsCategory;

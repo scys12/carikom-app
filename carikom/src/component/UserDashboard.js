@@ -12,6 +12,7 @@ export default class UserDashboard extends Component {
      }
 
     componentDidMount(){
+        console.log(this.props);
         if (typeof this.props.location.state != "undefined") {
             this.setState({message:this.props.location.state.message, type:this.props.location.state.type})
             setTimeout(() => {

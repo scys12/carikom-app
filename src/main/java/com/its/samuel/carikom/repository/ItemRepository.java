@@ -1,6 +1,5 @@
 package com.its.samuel.carikom.repository;
 
-import com.its.samuel.carikom.model.Category;
 import com.its.samuel.carikom.model.Item;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +14,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     Page<Item> findByUserId(Long userId, Pageable pageable);
     Page<Item> findByNameContainingAndIsBought(String name, Integer isBought, Pageable pageable);
     Optional<Item> findByName(String name);
-    Optional<Item> findByCategory(Category category);
+    Page<Item> findByCategoryId(Long categoryId, Pageable pageable);
     Long countByCategoryId(Long categoryId);
     @Query(value = "select * from items where is_bought = 0 order by id desc limit 6", nativeQuery = true)
     List<Item> findByIsBoughtOrderByIdDesc();

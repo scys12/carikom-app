@@ -85,6 +85,10 @@ class UserService {
   getAllItems(page){
     return axios.get(`${API_URL}items?page=${page}&size=12`);
   }
+
+  getItemsFromCategory(id,page){
+    return axios.get(`${API_URL}category/item/${id}?page=${page}&size=9`);
+  }
 }
 
 export default new UserService();

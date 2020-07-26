@@ -19,7 +19,8 @@ class SearchResult extends Component {
         success : false,
         showAlertNotification : true,
         type : '',
-        searchWord : ''
+        searchWord : '',
+        numberOfElements : null
     }
 
     setRadioValue(radioValue){
@@ -39,11 +40,13 @@ class SearchResult extends Component {
         });
         UserService.search(params.get('searchWord'), params.get('type'), this.state.activePage-1).then(
             response => {
+                console.log(response)
                 this.setState({
                     searchResult : response.data.content,
                     totalPages : response.data.totalPages,
                     itemsCountPerPage : response.data.size,
                     totalItemsCount : response.data.totalElements,
+                    numberOfElements : response.data.numberOfElements,
                     searchWord : params.get('searchWord'),
                     type : params.get('type')
                 });
@@ -72,7 +75,7 @@ class SearchResult extends Component {
                     totalPages : response.data.totalPages,
                     itemsCountPerPage : response.data.size,
                     totalItemsCount : response.data.totalElements,
-                    isLoading : false,
+                    numberOfElements : response.data.numberOfElements,
                     searchResult : response.data.content
                 });
             },
@@ -82,7 +85,7 @@ class SearchResult extends Component {
         )
     }
 
-    render() {
+    render() {        
         const radios = [
             { name: 'Product', value: "product" },
             { name: 'User', value: "user" },
@@ -108,6 +111,7 @@ class SearchResult extends Component {
                         ))}
                     </ButtonGroup>
                 </div>
+                <div className="text-center">Menampilkan <strong> {this.state.numberOfElements} {this.state.type} </strong> hasil pencarian untuk <strong>"{this.state.searchWord}"</strong> dari <strong>{this.state.totalItemsCount} {this.state.type}</strong> </div>
                 <Row className="show-grid text-center">
                     {(this.state.searchResult && this.state.type ==="product") && this.state.searchResult.map(item =>
                         <div key={item.id} className="item-wrapper">
