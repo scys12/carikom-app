@@ -1,27 +1,24 @@
 import axios from 'axios';
 import authHeader from './authHeader';
 
-const API_URL = 'http://localhost:8080/api/';
-
 const headers = {
   headers : authHeader()
 };
 
 class UserService {
   getCategories(userId){
-	console.log ("hah");
-      return axios.get(API_URL + `categories`);
+      return axios.get(`/api/categories`);
   }
 
   addProduct(name, description, price, category){
     const req_data = {
       name : name,
       description : description,
-      price : price, 
+      price : price,
       isBought: 0,
       category : JSON.parse(category),
     }
-    return axios.post(API_URL + "item", req_data, headers);
+    return axios.post("/api/item", req_data, headers);
   }
 
   editProduct(name, description, price, category, id){
@@ -29,22 +26,22 @@ class UserService {
       id : id,
       name : name,
       description : description,
-      price : price, 
+      price : price,
       isBought: 0,
       category : JSON.parse(category),
     }
-    return axios.put(`${API_URL}item/edit`, req_data, headers);
+    return axios.put(`/api/item/edit`, req_data, headers);
   }
 
   search(searchInput, type, page){
-    return axios.get(`${API_URL}search?type=${type}&searchWord=${searchInput}&page=${page}&size=9`);
+    return axios.get(`/api/search?type=${type}&searchWord=${searchInput}&page=${page}&size=9`);
   }
   searchUserItems(id,searchInput, type, page){
-    return axios.get(`${API_URL}user/${id}/search?type=${type}&searchWord=${searchInput}&page=${page}&size=9`, headers);
+    return axios.get(`/api/user/${id}/search?type=${type}&searchWord=${searchInput}&page=${page}&size=9`, headers);
   }
 
   getUserProfile(username){
-    return axios.get(`${API_URL}user/${username}`,headers)
+    return axios.get(`/api/user/${username}`,headers)
   }
 
   editProfile(username, email, nama, lokasi, telepon, password){
@@ -56,7 +53,7 @@ class UserService {
       telepon : telepon,
       password : password
     }
-    return axios.put(`${API_URL}user/edit`, request_data, headers).then(
+    return axios.put(`/api/user/edit`, request_data, headers).then(
       response => {
         if (response.data.token) {
             localStorage.removeItem("user");
@@ -67,34 +64,34 @@ class UserService {
     );
   }
 
-  getUserItems(id,page){    
-    return axios.get(`${API_URL}item/user/${id}?page=${page}&size=9`,headers);
+  getUserItems(id,page){
+    return axios.get(`/api/item/user/${id}?page=${page}&size=9`,headers);
   }
 
   deleteProduct(id){
     const headers = {
       headers : authHeader()
     };
-    return axios.delete(`${API_URL}item/delete/${id}`,headers);
+    return axios.delete(`/api/item/delete/${id}`,headers);
   }
 
   getItemDetail(id){
     const headers = {
       headers : authHeader()
     };
-    return axios.get(`${API_URL}item/${id}`,headers);
+    return axios.get(`/api/item/${id}`,headers);
   }
 
   getLatestProduct(){
-    return axios.get(`${API_URL}latestitem`);
+    return axios.get(`/api/latestitem`);
   }
 
   getAllItems(page){
-    return axios.get(`${API_URL}items?page=${page}&size=12`);
+    return axios.get(`/api/items?page=${page}&size=12`);
   }
 
   getItemsFromCategory(id,page){
-    return axios.get(`${API_URL}category/item/${id}?page=${page}&size=9`);
+    return axios.get(`/api/category/item/${id}?page=${page}&size=9`);
   }
 
   buyItem(item){
@@ -105,7 +102,7 @@ class UserService {
       price : item.price,
     }
 
-    return axios.post(`${API_URL}buy`, req_data, headers);
+    return axios.post(`/api/buy`, req_data, headers);
   }
 }
 

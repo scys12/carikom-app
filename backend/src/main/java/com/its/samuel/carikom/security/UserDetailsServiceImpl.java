@@ -1,7 +1,8 @@
-package com.its.samuel.carikom.security.service;
+package com.its.samuel.carikom.security;
 
 import com.its.samuel.carikom.model.User;
 import com.its.samuel.carikom.repository.UserRepository;
+import com.its.samuel.carikom.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

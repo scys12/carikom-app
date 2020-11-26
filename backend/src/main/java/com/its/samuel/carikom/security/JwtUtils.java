@@ -1,6 +1,5 @@
-package com.its.samuel.carikom.security.jwt;
+package com.its.samuel.carikom.security;
 
-import com.its.samuel.carikom.security.service.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

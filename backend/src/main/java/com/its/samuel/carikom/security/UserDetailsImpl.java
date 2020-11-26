@@ -1,4 +1,4 @@
-package com.its.samuel.carikom.security.service;
+package com.its.samuel.carikom.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.its.samuel.carikom.model.User;
